@@ -9,7 +9,7 @@ if ($_SESSION['connstr'] == "") {
 
 $dbconn = pg_connect($_SESSION['connstr']);
 
-require_once("global_parameters.php");
+require_once("func_global_parameters.php");
 
 $columns = get_global_parameters_options($dbconn);
 

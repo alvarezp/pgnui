@@ -28,7 +28,7 @@ require_once("func_get_table_list.php");
 
 $tables = get_table_list($dbconn);
 
-require_once("global_parameters.php");
+require_once("func_global_parameters.php");
 
 $global_parameters = get_global_parameters_options($dbconn);
 
