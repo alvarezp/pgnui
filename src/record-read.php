@@ -7,7 +7,7 @@ function read_record_where($dbconn, $catalog, $schema, $table, $where) {
 
 function read_record($dbconn, $catalog, $schema, $table, $rowid) {
 
-	require_once("rowid.php");
+	require_once("func_rowid.php");
 	$where = rowid_to_where($rowid);
 
 	return read_record_where($dbconn, $catalog, $schema, $table, $where);

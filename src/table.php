@@ -93,7 +93,7 @@ $global_parameters = get_global_parameters_options($dbconn);
 <? 		foreach($r as $col_name => $d): ?>
 			<td><? print $d; ?></td>
 <? 		endforeach; ?>
-<?		require_once("rowid.php"); ?>
+<?		require_once("func_rowid.php"); ?>
 <?		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
 			<td><a href="edit-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>&rowid=<? print $row_id; ?>">Mod</a></td>
 		<tr>
