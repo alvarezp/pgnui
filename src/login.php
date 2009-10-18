@@ -19,7 +19,7 @@ $_SESSION['connstr'] = "host=localhost port=5432 dbname=$database user=$username
 $_SESSION['username'] = $_POST['username'];
 $_SESSION['database'] = $_POST['catalog'];
 
-header("Location: global_parameters_template.php");
+header("Location: global_parameters_chooser.php");
 
 ?>
 
