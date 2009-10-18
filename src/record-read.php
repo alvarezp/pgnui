@@ -16,7 +16,7 @@ function read_record($dbconn, $catalog, $schema, $table, $rowid) {
 
 
 function get_columns_as_keys($dbconn, $catalog, $schema, $table) {
-	$fields = pg_query_params($dbconn, "SELECT * FROM information_schema.columns WHERE table_schema = $1 AND table_name = $2 ORDER BY ordinal_position ORDER BY is_nullable ASC, ordinal_position ASC;", array($schema, $table));
+	$fields = pg_query_params($dbconn, "SELECT * FROM information_schema.columns WHERE table_schema = $1 AND table_name = $2 ORDER BY is_nullable ASC, ordinal_position ASC;", array($schema, $table));
 
 	if ($fields) {
 		while ($field = pg_fetch_array($fields)) {
