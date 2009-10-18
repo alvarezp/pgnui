@@ -24,6 +24,7 @@ $tables = get_table_list($dbconn);
 <html>
 
 <head>
+	<link rel="stylesheet" href="default_style.css" type="text/css">
 </head>
 
 <body>

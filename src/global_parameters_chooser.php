@@ -20,6 +20,7 @@ if ($columns === NULL) {
 <html>
 
 <head>
+	<link rel="stylesheet" href="default_style.css" type="text/css">
 </head>
 
 <body>

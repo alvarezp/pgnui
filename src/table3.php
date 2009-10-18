@@ -34,6 +34,7 @@ $global_parameters = get_global_parameters_options($dbconn);
 <html>
 
 <head>
+	<link rel="stylesheet" href="default_style.css" type="text/css">
 </head>
 
 <body>
