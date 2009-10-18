@@ -8,7 +8,7 @@ $catalog = $_SESSION['database'];
 $schema = $_GET[schema];
 $table = $_GET[table];
 
-require_once("table2.php");
+require_once("func_table.php");
 
 $table_rows = get_table_rows($dbconn, $catalog, $schema, $table);
 
