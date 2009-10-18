@@ -107,7 +107,9 @@ $global_parameters = get_global_parameters_options($dbconn);
 
 </table>
 
-<a href="insert-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>">Ins</a>
+<p>
+	<a href="insert-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>">Ins</a>
+</p>
 
 </body>
 
