@@ -38,7 +38,9 @@ foreach($data as $row):
 	endforeach;
 endforeach;
 
-pg_query_params("INSERT INTO $schema.$table (" . join($provided_columns, ",") . ") VALUES (" . join($provided_params, ",") . ")", $provided_values);
+if (count($provided_columns) > 0) {
+	pg_query_params("INSERT INTO $schema.$table (" . join($provided_columns, ",") . ") VALUES (" . join($provided_params, ",") . ")", $provided_values);
+}
 
 pg_query("COMMIT;");
 
