@@ -40,6 +40,6 @@ function save_global_parameters($dbconn, $globals) {
 
 save_global_parameters($dbconn, $_POST[globals]);
 
-header ('Location: onlymainmenu.php');
+header ('Location: mainmenu.php');
 
 ?>

@@ -14,7 +14,7 @@ require_once("global_parameters.php");
 $columns = get_global_parameters_options($dbconn);
 
 if ($columns === NULL) {
-	header ('Location: onlymainmenu.php');
+	header ('Location: mainmenu.php');
 };
 
 ?>
