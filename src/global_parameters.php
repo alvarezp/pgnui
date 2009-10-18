@@ -2,6 +2,11 @@
 
 session_start();
 
+if ($_SESSION['connstr'] == "") {
+	header("Location: index.php");
+	break;
+}
+
 function get_global_parameters_options($dbconn) {
 
 	$columns_global_parameters = pg_query_params($dbconn, "SELECT DISTINCT * FROM ___pgnui_column_reference_tree.global_parameters()", array());
