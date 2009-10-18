@@ -37,7 +37,7 @@ pg_query_params("INSERT INTO $schema.$table (" . join($provided_columns, ",") . 
 
 pg_query("COMMIT;");
 
-header("Location: table3.php?schema=$schema&table=$table");
+header("Location: table.php?schema=$schema&table=$table");
 
 #pg_query_params($dbconn, "UPDATE $schema.$table SET $key = $1 WHERE " . rowid_to_where($rowid), array($change[value]));
 ?>

@@ -28,7 +28,7 @@ endforeach;
 
 pg_query("COMMIT;");
 
-header("Location: table3.php?schema=$schema&table=$table");
+header("Location: table.php?schema=$schema&table=$table");
 
 ?>
 
