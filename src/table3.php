@@ -28,6 +28,16 @@ require_once("global_parameters.php");
 $global_parameters = get_global_parameters_options($dbconn);
 
 ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+</head>
+
+<body>
+
 
 <? if ($blogal_parameters !== NULL): ?>
 
@@ -92,5 +102,9 @@ $global_parameters = get_global_parameters_options($dbconn);
 </table>
 
 <a href="insert-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>">Ins</a>
+
+</body>
+
+</html>
 
 

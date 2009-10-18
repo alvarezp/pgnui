@@ -10,6 +10,10 @@ session_start();
 	"http://www.w3.org/TR/html4/strict.dtd">
 
 <html>
+
+<head>
+</head>
+
 <body>
 
 <div class="index header" id="index_header">

@@ -23,6 +23,16 @@ $tables = get_table_list($dbconn);
 
 ?>
 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+</head>
+
+<body>
+
 <p> | 
 <? foreach((array) $tables as $t): ?>
 	<a href="table3.php?<? print $t[parameterstring]; ?>"><? print $t[pretty_name]; ?></a> | 
@@ -53,3 +63,6 @@ $tables = get_table_list($dbconn);
 	<input type="submit">
 </form>
 
+</body>
+
+</html>

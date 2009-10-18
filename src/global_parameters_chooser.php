@@ -19,6 +19,9 @@ if ($columns === NULL) {
 
 <html>
 
+<head>
+</head>
+
 <body>
 
 	<p>Please choose the global variables:</p>
