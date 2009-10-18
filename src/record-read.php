@@ -45,6 +45,8 @@ function get_columns_as_keys($dbconn, $catalog, $schema, $table) {
 				}
 			}
 
+			$pretty_columns[$field[column_name]][required] = $field[is_nullable];
+
 		}
 	}
 
