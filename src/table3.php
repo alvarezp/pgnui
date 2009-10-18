@@ -19,7 +19,7 @@ if ($table_rows == FALSE) {
 $table_columns = get_all_columns($dbconn, $catalog, $schema, $table);
 $ref_constraints = columns_ref_constraint($dbconn, $catalog, $schema, $table);
 
-require_once("mainmenu.php");
+require_once("get_table_list.php");
 
 $tables = get_table_list($dbconn);
 

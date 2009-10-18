@@ -4,7 +4,7 @@ session_start();
 
 $dbconn = pg_connect($_SESSION['connstr']);
 
-require_once("mainmenu.php");
+require_once("get_table_list.php");
 
 $tables = get_table_list($dbconn);
 
