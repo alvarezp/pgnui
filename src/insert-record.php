@@ -13,7 +13,7 @@ require_once("record-read.php");
 $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 
 
-require_once("get_table_list.php");
+require_once("func_get_table_list.php");
 
 $tables = get_table_list($dbconn);
 
