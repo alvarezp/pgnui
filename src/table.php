@@ -102,6 +102,7 @@ $global_parameters = get_global_parameters_options($dbconn);
 <?		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
 			<td><a href="edit-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>&rowid=<? print $row_id; ?>">Mod</a></td>
 			<td><a href="view-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>&rowid=<? print $row_id; ?>">View</a></td>
+			<td><a href="delete-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>&rowid=<? print $row_id; ?>">Del</a></td>
 		<tr>
 <? endforeach; ?>
 	</tbody>
