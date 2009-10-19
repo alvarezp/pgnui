@@ -34,7 +34,25 @@ function get_table_rows($dbconn, $catalog, $schema, $table) {
 #    a. value.
 
 	$where = get_table_where($dbconn, $catalog, $schema, $table);
-	print $where;
+
+	$rows = pg_query_params($dbconn, "SELECT * FROM $schema.$table $where;", array());
+
+	$all_rows = pg_fetch_all($rows);
+
+	return $all_rows;
+
+}
+
+function get_table_rows_where($dbconn, $catalog, $schema, $table, $where) {
+
+# RETURN: $columns
+# 1. column_name
+# 2. description
+
+# RETURN: $rows
+# 1. edit_link
+# 2. columns:
+#    a. value.
 
 	$rows = pg_query_params($dbconn, "SELECT * FROM $schema.$table $where;", array());
 

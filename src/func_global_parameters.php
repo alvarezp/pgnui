@@ -20,4 +20,33 @@ function get_global_parameters_options($dbconn) {
 
 }
 
+function get_current_global_parameters($dbconn) {
+
+	$columns_global_parameters = pg_query($dbconn, "SELECT * FROM ___pgnui_global_parameters_values;");
+
+	return pg_fetch_all($columns_global_parameters);
+
+}
+
+function get_current_global_parameters_friendly_comma_list($dbconn) {
+
+	$gp = get_current_global_parameters($dbconn);
+
+	$ret = "";
+
+	$count = 0;
+	foreach($gp as $param):
+		if ($count == 0) {
+			$ret = $ret . $param[value];
+		} else {
+			$ret = $ret . ", " . $param[value];
+		}
+		$count++;
+	endforeach;
+
+	return $ret;
+
+}
+
+
 ?>

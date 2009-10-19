@@ -15,7 +15,8 @@ $table = $_GET[table];
 
 require_once("func_table.php");
 
-$table_rows = get_table_rows($dbconn, $catalog, $schema, $table);
+$table_where = get_table_where($dbconn, $catalog, $schema, $table);
+$table_rows = get_table_rows_where($dbconn, $catalog, $schema, $table, $table_where);
 
 if ($table_rows == FALSE) {
 	$table_rows = array();
@@ -30,7 +31,7 @@ $tables = get_table_list($dbconn);
 
 require_once("func_global_parameters.php");
 
-$global_parameters = get_global_parameters_options($dbconn);
+$global_parameters_friendly_comma_list = get_current_global_parameters_friendly_comma_list($dbconn);
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -45,36 +46,14 @@ $global_parameters = get_global_parameters_options($dbconn);
 <body>
 
 
-<? if ($blogal_parameters !== NULL): ?>
+<? if ($table_where !== ""): ?>
 
-	<p>Currently working with:</p>
-	<form action="global_parameters_send.php" method="post">
-
-<?	foreach ($global_parameters as $catalog => $c):
-		foreach ($c as $schema => $s):
-			foreach ($s as $table => $t):
-				foreach ($t as $column => $col): ?>
-		<p>
-			<label for="<? print $column; ?>">
-			<? print "$schema.$table.$column:"; ?> 
-			</label>
-			<select name="globals<? print "[$catalog][$schema][$table][$column]"; ?>">
-				<option value="">(All)</option>
-<?					foreach ($col[values] as $x => $v): ?>
-				<option value="<? print $v; ?>"><? print $v; ?></option>
-<?					endforeach; ?>
-			</select>
-		</p>
-<?				endforeach;
-			endforeach;
-		endforeach;
-	endforeach; ?>
-
-		<input type="submit" value="Change global parameters">
-
-	</form>
+	<div class="global_parameters_show" id="global_parameters_show">
+	<p>Only showing records relevant to <span class="global_parameters_list"><? print $global_parameters_friendly_comma_list; ?></span>. <a href="global_parameters_chooser.php">[ Change ]</a></p>
+	</div>
 
 <? endif; ?>
+
 
 <p> | 
 <? foreach((array) $tables as $t): ?>

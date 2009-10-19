@@ -23,3 +23,6 @@ td, th {
 	padding: 0 0.5em 0 0.5em;
 }
 
+span.global_parameters_list {
+	font-weight: bold;
+}
