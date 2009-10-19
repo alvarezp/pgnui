@@ -14,8 +14,6 @@ $schema = $_GET[schema];
 $table = $_GET[table];
 $rowid = $_GET[rowid]; # string for record should be "(field1,field2...)(value1,value2)"
 
-print "<pre>" . $rowid . "</pre>";
-
 require_once("record-read.php");
 
 $record = read_record($dbconn, $catalog, $schema, $table, $rowid);
