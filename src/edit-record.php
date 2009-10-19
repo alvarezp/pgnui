@@ -37,6 +37,8 @@ $tables = get_table_list($dbconn);
 
 <body>
 
+<h1>Menu</h1>
+
 <p> | 
 <? foreach((array) $tables as $t): ?>
 	<a href="table.php?<? print $t[parameterstring]; ?>"><? print $t[pretty_name]; ?></a> | 

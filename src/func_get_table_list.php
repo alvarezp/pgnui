@@ -1,5 +1,25 @@
 <?
 
+function get_best_name_for_table($dbconn, $this_table_schema, $this_table_table) {
+
+		$comment_result = pg_query($dbconn, "SELECT obj_description('$this_table_schema.$this_table_table'::regclass, 'pg_class');");
+		$comment_row = pg_fetch_row($comment_result);
+		$comment = $comment_row[0];
+
+		$visible_result = pg_query($dbconn, "SELECT pg_table_is_visible('$this_table_schema.$this_table_table'::regclass);");
+		$visible_row = pg_fetch_row($visible_result);
+		$visible = $visible_row[0];
+
+		if ($comment != "") {
+			return $comment;
+		} elseif ($visible == "t") {
+			return $this_table_table;
+		} else {
+			return $this_table_schema . "." . $this_table_table;
+		}
+
+}
+
 function get_table_list($dbconn) {
 
 	$searchpath_result = pg_query($dbconn, "SHOW search_path;");
@@ -18,21 +38,7 @@ function get_table_list($dbconn) {
 		$this_table_schema = $tables[$index][schema];
 		$this_table_table = $tables[$index][table];
 
-		$comment_result = pg_query($dbconn, "SELECT obj_description('$this_table_schema.$this_table_table'::regclass, 'pg_class');");
-		$comment_row = pg_fetch_row($comment_result);
-		$comment = $comment_row[0];
-
-		$visible_result = pg_query($dbconn, "SELECT pg_table_is_visible('$this_table_schema.$this_table_table'::regclass);");
-		$visible_row = pg_fetch_row($visible_result);
-		$visible = $visible_row[0];
-
-		if ($comment != "") {
-			$tables[$index][pretty_name] = $comment;
-		} elseif ($visible == "t") {
-			$tables[$index][pretty_name] = $tables[$index][table];
-		} else {
-			$tables[$index][pretty_name] = $tables[$index][schema] . "." . $tables[$index][table];
-		}
+		$tables[$index][pretty_name] = get_best_name_for_table($dbconn, $this_table_schema, $this_table_table);
 
 		$index++;
 	}

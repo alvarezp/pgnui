@@ -33,6 +33,8 @@ require_once("func_global_parameters.php");
 
 $global_parameters_friendly_comma_list = get_current_global_parameters_friendly_comma_list($dbconn);
 
+$table_pretty_name = get_best_name_for_table($dbconn, $schema, $table)
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 	"http://www.w3.org/TR/html4/strict.dtd">
@@ -45,7 +47,6 @@ $global_parameters_friendly_comma_list = get_current_global_parameters_friendly_
 
 <body>
 
-
 <? if ($table_where !== ""): ?>
 
 	<div class="global_parameters_show" id="global_parameters_show">
@@ -54,12 +55,15 @@ $global_parameters_friendly_comma_list = get_current_global_parameters_friendly_
 
 <? endif; ?>
 
+<h1>Menu</h1>
 
 <p> | 
 <? foreach((array) $tables as $t): ?>
 	<a href="?<? print $t[parameterstring]; ?>"><? print $t[pretty_name]; ?></a> | 
 <? endforeach ?>
 </p>
+
+<h1><? print $table_pretty_name; ?></h1>
 
 <table>
 	<thead>

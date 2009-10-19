@@ -34,11 +34,15 @@ $tables = get_table_list($dbconn);
 
 <body>
 
+<h1>Menu</h1>
+
 <p> | 
 <? foreach((array) $tables as $t): ?>
 	<a href="table.php?<? print $t[parameterstring]; ?>"><? print $t[pretty_name]; ?></a> | 
 <? endforeach ?>
 </p>
+
+<h1>Insert new record</h1>
 
 <form action="submit-new-record.php" method="POST">
 	<input type="hidden" name="catalog" value="<? print $catalog; ?>"></input>
