@@ -6,6 +6,7 @@ CREATE SCHEMA ___pgnui_column_reference_tree;
 DROP VIEW ___pgnui_column_reference_tree.column_reference_tree;
 CREATE VIEW ___pgnui_column_reference_tree.column_reference_tree AS
 SELECT
+rc.constraint_catalog AS c_catalog, rc.constraint_schema AS c_schema, rc.constraint_name AS c_name, 
 rc.table_catalog AS rc_catalog, rc.table_schema AS rc_schema, rc.table_name AS rc_table, rc.column_name AS rc_column,
 ref.table_catalog AS ref_catalog, ref.table_schema AS ref_schema, ref.table_name AS ref_table, ref.column_name AS ref_column
 FROM
