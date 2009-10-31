@@ -153,7 +153,7 @@ CREATE VIEW ___pgnui_column_reference_tree.uniq_inside_fk AS
 SELECT
 	uniq.constraint_catalog,
 	uniq.constraint_schema,
-	uniq.table_name AS constaint_table,
+	uniq.table_name AS constraint_table,
     fk.constraint_name AS fk_name,
     uniq.constraint_name AS uniq_name
 FROM
