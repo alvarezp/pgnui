@@ -1,6 +1,6 @@
 <?
 
-function get_table_where($dbconn, $catalog, $schema, $table) {
+function get_table_where($dbconn, $catalog, $schema, $table, $put_where = TRUE) {
 
 	$columns_global_parameters = pg_query_params($dbconn, "SELECT * FROM ___pgnui_column_reference_tree.table_column_globals($1, $2, $3);", array($catalog, $schema, $table));
 
@@ -15,7 +15,11 @@ function get_table_where($dbconn, $catalog, $schema, $table) {
 	if ($where == '(') {
 		$where = '';
 	} else {
-		$where = 'WHERE ' . $where . ')';
+		if ($put_where == TRUE) {
+			$where = 'WHERE ' . $where . ')';
+		} else {
+			$where = $where . ')';
+		}
 	}
 
 	return $where;
