@@ -53,6 +53,12 @@ $table_pretty_name = get_best_name_for_table($dbconn, $schema, $table)
 	<p>Only showing records relevant to <span class="global_parameters_list"><? print $global_parameters_friendly_comma_list; ?></span>. <a href="global_parameters_chooser.php">[ Change ]</a></p>
 	</div>
 
+<? else: ?>
+
+	<div class="global_parameters_show" id="global_parameters_show">
+	<p>Not limiting records by relevance. <a href="global_parameters_chooser.php">[ Change ]</a></p>
+	</div>
+
 <? endif; ?>
 
 <h1>Menu</h1>
