@@ -2,9 +2,10 @@
 
 require_once ("html_control.php");
 
-class HtmlControlTextbox extends HtmlControl {
+class HtmlControlDropdown extends HtmlControl {
 
 	private $value;
+	private $option_list;
 
 	public function get_supported_types() {
 		return array(
@@ -28,6 +29,10 @@ class HtmlControlTextbox extends HtmlControl {
 		$this->value = $v;
 	}
 
+	public function set_option_list($a) {
+		$this->option_list = $a;
+	}
+
 	public function get_sql_update_from_diff($bef, $aft) {
 		if ($bef[value] != $aft[value]) {
 			if ($aft[value] == '') {
@@ -38,20 +43,33 @@ class HtmlControlTextbox extends HtmlControl {
 		}
 	}
 
-	public function set_option_list($a) {
-	}
-
 	public function get_html_editable($basename) {
 		$r = "";
 
-		$r .= "<span class='textbox' id='${basename}'>\n";
+		$r .= "<span class='dropdown' id='${basename}'>\n";
 
 		if (isset($this->value)) {
 			$r .= "<input type='hidden' name='${basename}[bef][value]' value='$this->value'></input>\n";
-			$r .= "<input id='${basename}[aft][value]' type='text' name='${basename}[aft][value]' class='textbox' value='$this->value'></input>\n";
+			$r .= "<select id='${basename}[aft][value]' type='text' name='${basename}[aft][value]' class='dropdown' value='$this->value'>";
+			if ($this->option_list) {
+				foreach ($this->option_list as $v) {
+					foreach ($v as $f) {
+						$r .= " <option value='$f'>$f</option>";
+					}
+				}
+			}
+			$r .= "</select>\n";
 		} else {
 			$r .= "<input type='hidden' name='${basename}[bef][value]' value=''></input>\n";
-			$r .= "<input id='${basename}[aft][value]' type='text' name='${basename}[aft][value]' class='textbox' value=''></input>\n";
+			$r .= "<select id='${basename}[aft][value]' type='text' name='${basename}[aft][value]' class='dropdown' value=''>";
+			if ($this->option_list) {
+				foreach ($this->option_list as $v) {
+					foreach ($v as $f) {
+						$r .= " <option value='$f'>$f</option>";
+					}
+				}
+			}
+			$r .= "</select>\n";
 		}
 		$r .= "</span>";
 

@@ -9,6 +9,7 @@ abstract class HtmlControl {
 	abstract public function get_html_static($basename);
 	abstract public function get_html_editable($basename);
 	abstract public function get_sql_update_from_diff($bef, $aft);
+	abstract public function set_option_list($a);
 
 }
 
