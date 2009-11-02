@@ -31,9 +31,14 @@ $tables = get_table_list($dbconn);
 
 require_once("func_global_parameters.php");
 
-$global_parameters_friendly_comma_list = get_current_global_parameters_friendly_comma_list($dbconn);
+$columns = get_global_parameters_options($dbconn);
 
-$table_pretty_name = get_best_name_for_table($dbconn, $schema, $table)
+if ($columns !== NULL) {
+	$global_parameters_friendly_comma_list = get_current_global_parameters_friendly_comma_list($dbconn);
+}
+
+
+$table_pretty_name = get_best_name_for_table($dbconn, $schema, $table);
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -47,17 +52,21 @@ $table_pretty_name = get_best_name_for_table($dbconn, $schema, $table)
 
 <body>
 
-<? if ($table_where !== ""): ?>
+<? if ($columns !== NULL): ?>
+
+<? 		if ($table_where !== ""): ?>
 
 	<div class="global_parameters_show" id="global_parameters_show">
 	<p>Only showing records relevant to <span class="global_parameters_list"><? print $global_parameters_friendly_comma_list; ?></span>. <a href="global_parameters_chooser.php">[ Change ]</a></p>
 	</div>
 
-<? else: ?>
+<? 		else: ?>
 
 	<div class="global_parameters_show" id="global_parameters_show">
 	<p>Not limiting records by relevance. <a href="global_parameters_chooser.php">[ Change ]</a></p>
 	</div>
+
+<? 		endif; ?>
 
 <? endif; ?>
 
