@@ -3,14 +3,13 @@
 DROP SCHEMA ___pgnui_information_schema CASCADE;
 CREATE SCHEMA ___pgnui_information_schema;
 
-DROP VIEW ___pgnui_information_schema.table_constraints CASCADE;
-CREATE VIEW ___pgnui_information_schema.table_constraints AS
-
 DROP VIEW ___pgnui_information_schema.key_column_usage CASCADE;
 CREATE VIEW ___pgnui_information_schema.key_column_usage AS
 SELECT constraint_catalog, constraint_schema, constraint_name, table_catalog, table_schema, table_name, column_name, ordinal_position, COALESCE(position_in_unique_constraint, '1') AS position_in_unique_constraint
 FROM information_schema.key_column_usage;
 
+DROP VIEW ___pgnui_information_schema.table_constraints CASCADE;
+CREATE VIEW ___pgnui_information_schema.table_constraints AS
 SELECT
 	current_database()::information_schema.sql_identifier AS constraint_catalog,
 	nc.nspname::information_schema.sql_identifier AS constraint_schema,
