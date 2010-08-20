@@ -65,7 +65,8 @@ function get_columns_as_keys($dbconn, $catalog, $schema, $table) {
 		}
 	}
 
-	if ($columns_str == "") $columns_str = "*";
+	/*if ($columns_str == "") */
+	$columns_str = "*";
 	$rows = pg_query_params($dbconn, "SELECT $columns_str FROM ${schema}.${table};", array());
 
 	return $pretty_columns;
