@@ -4,6 +4,8 @@ function get_global_parameters_options($dbconn) {
 
 	$columns_global_parameters = pg_query_params($dbconn, "SELECT DISTINCT * FROM ___pgnui_column_reference_tree.global_parameters()", array());
 
+	$columns = array();
+
 	while ($g = pg_fetch_array($columns_global_parameters)):
 		$columns[$g[catalog_name]][$g[schema_name]][$g[table_name]][$g[column_name]][values] = array();
 

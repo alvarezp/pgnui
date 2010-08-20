@@ -13,7 +13,7 @@ require_once("func_global_parameters.php");
 
 $columns = get_global_parameters_options($dbconn);
 
-if ($columns === NULL) {
+if (count($columns) == 0) {
 	header ('Location: mainmenu.php');
 };
 
