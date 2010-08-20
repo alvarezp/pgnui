@@ -9,9 +9,9 @@ function get_table_where($dbconn, $catalog, $schema, $table, $prepend = 'WHERE '
 	$where = '(';
 	while ($gc = pg_fetch_array($columns_global_parameters)):
 
-		if ($_SESSION['globals'][$gc[dep_catalog_name]][$gc[dep_schema_name]][$gc[dep_table_name]][$gc[dep_column_name]] != "") {
+		if ($_SESSION['globals'][$gc['dep_catalog_name']][$gc['dep_schema_name']][$gc['dep_table_name']][$gc['dep_column_name']] != "") {
 			if ($where != '(') $where .= ' AND ';
-			$where = $where . '("' . $gc[column_name] . '" = \'' . $_SESSION['globals'][$gc[dep_catalog_name]][$gc[dep_schema_name]][$gc[dep_table_name]][$gc[dep_column_name]] . '\')';
+			$where = $where . '("' . $gc[column_name] . '" = \'' . $_SESSION['globals'][$gc['dep_catalog_name']][$gc['dep_schema_name']][$gc['dep_table_name']][$gc['dep_column_name']] . '\')';
 		}
 	endwhile;
 	if ($where == '(') {

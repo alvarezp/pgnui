@@ -31,14 +31,14 @@ function get_table_list($dbconn) {
 
 	$index = 0;
 	while ($o = pg_fetch_row($r)) {
-		$tables[$index][schema] = $o[1];
-		$tables[$index][table] = $o[2];
-		$tables[$index][parameterstring] = "schema=" . urlencode($tables[$index][schema]) . "&table=" . urlencode($tables[$index][table]);
+		$tables[$index]['schema'] = $o[1];
+		$tables[$index]['table'] = $o[2];
+		$tables[$index]['parameterstring'] = "schema=" . urlencode($tables[$index]['schema']) . "&table=" . urlencode($tables[$index]['table']);
 
-		$this_table_schema = $tables[$index][schema];
-		$this_table_table = $tables[$index][table];
+		$this_table_schema = $tables[$index]['schema'];
+		$this_table_table = $tables[$index]['table'];
 
-		$tables[$index][pretty_name] = get_best_name_for_table($dbconn, $this_table_schema, $this_table_table);
+		$tables[$index]['pretty_name'] = get_best_name_for_table($dbconn, $this_table_schema, $this_table_table);
 
 		$index++;
 	}

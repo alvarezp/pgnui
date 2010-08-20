@@ -38,7 +38,7 @@ function save_global_parameters($dbconn, $globals) {
 
 }
 
-save_global_parameters($dbconn, $_POST[globals]);
+save_global_parameters($dbconn, $_POST['globals']);
 
 header ('Location: mainmenu.php');
 

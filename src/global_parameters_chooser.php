@@ -43,7 +43,7 @@ if (count($columns) == 0) {
 			</label>
 			<select name="globals<? print "[$catalog][$schema][$table][$column]"; ?>">
 				<option value="">(All)</option>
-<?					foreach ($col[values] as $x => $v): ?>
+<?					foreach ($col['values'] as $x => $v): ?>
 				<option value="<? print $v; ?>"><? print $v; ?></option>
 <?					endforeach; ?>
 			</select>

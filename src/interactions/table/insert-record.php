@@ -12,8 +12,8 @@ if ($_SESSION['connstr'] == "") {
 $dbconn = pg_connect($_SESSION['connstr']);
 
 $catalog = $_SESSION['database'];
-$schema = $_GET[schema];
-$table = $_GET[table];
+$schema = $_GET['schema'];
+$table = $_GET['table'];
 
 require_once("record-read.php");
 
@@ -40,7 +40,7 @@ $tables = get_table_list($dbconn);
 
 <p> | 
 <? foreach((array) $tables as $t): ?>
-	<a href="table.php?<? print $t[parameterstring]; ?>"><? print $t[pretty_name]; ?></a> | 
+	<a href="table.php?<? print $t['parameterstring']; ?>"><? print $t['pretty_name']; ?></a> | 
 <? endforeach ?>
 </p>
 
@@ -55,7 +55,7 @@ $tables = get_table_list($dbconn);
 <?		foreach ($pretty_columns as $key => $column): ?>
 	<!-- COLUMN START -->
 	<div>
-	<?		print $pretty_columns[$key][pretty_name] . ": ". $pretty_columns[$key][control]->get_html_editable("data[0][columns][" . $key . "]"); ?>
+	<?		print $pretty_columns[$key]['pretty_name'] . ": ". $pretty_columns[$key]['control']->get_html_editable("data[0][columns][" . $key . "]"); ?>
 	</div>
 	<!-- COLUMN END -->
 <?		endforeach; ?>

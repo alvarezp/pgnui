@@ -6,7 +6,7 @@ function record_columns_to_rowid($table_columns, $r) {
 
 	$cid = 0;
 	foreach($r as $col_name => $d):
-		if ($table_columns[$cid][position_in_pk] > 0) {
+		if ($table_columns[$cid]['position_in_pk'] > 0) {
 			if ($rowid != "") $rowid .= urlencode("&");
 			$rowid .= urlencode(urlencode($col_name) . "=" . urlencode($d)) . "";
 		}

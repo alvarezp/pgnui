@@ -12,8 +12,8 @@ if ($_SESSION['connstr'] == "") {
 $dbconn = pg_connect($_SESSION['connstr']);
 
 $catalog = $_SESSION['database'];
-$schema = $_GET[schema];
-$table = $_GET[table];
+$schema = $_GET['schema'];
+$table = $_GET['table'];
 
 require_once("func_table.php");
 
@@ -76,7 +76,7 @@ $table_pretty_name = get_best_name_for_table($dbconn, $schema, $table);
 
 <p> | 
 <? foreach((array) $tables as $t): ?>
-	<a href="?<? print $t[parameterstring]; ?>"><? print $t[pretty_name]; ?></a> | 
+	<a href="?<? print $t['parameterstring']; ?>"><? print $t['pretty_name']; ?></a> | 
 <? endforeach ?>
 </p>
 
@@ -86,7 +86,7 @@ $table_pretty_name = get_best_name_for_table($dbconn, $schema, $table);
 	<thead>
 		<tr>
 <? foreach((array) $table_columns as $c): ?>
-			<th><? print $c[description] == "" ? $c[column_name] : $c[description]; ?></th>
+			<th><? print $c['description'] == "" ? $c['column_name'] : $c['description']; ?></th>
 <? endforeach; ?>
 			<th></th>
 		</tr>

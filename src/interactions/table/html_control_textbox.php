@@ -31,11 +31,11 @@ class HtmlControlTextbox extends HtmlControl {
 	}
 
 	public function get_sql_update_from_diff($bef, $aft) {
-		if ($bef[value] != $aft[value]) {
-			if ($aft[value] == '') {
+		if ($bef['value'] != $aft['value']) {
+			if ($aft['value'] == '') {
 				return array(change => 'yes', value => NULL);
 			} else {
-				return array(change => 'yes', value => $aft[value]);
+				return array(change => 'yes', value => $aft['value']);
 			}
 		}
 	}

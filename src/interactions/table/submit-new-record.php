@@ -12,9 +12,9 @@ if ($_SESSION['connstr'] == "") {
 $dbconn = pg_connect($_SESSION['connstr']);
 
 $catalog = $_SESSION['database'];
-$schema = $_POST[schema];
-$table = $_POST[table];
-$data = $_POST[data];
+$schema = $_POST['schema'];
+$table = $_POST['table'];
+$data = $_POST['data'];
 
 require_once ("record-read.php");
 
@@ -28,14 +28,14 @@ $provided_values = array();
 pg_query("BEGIN;");
 
 foreach($data as $row):
-	$rowid=$row[rowid];
-	foreach($row[columns] as $key => $col):
-		$change = $pretty_columns[$key][control]->get_sql_update_from_diff($col[bef], $col[aft]);
-		if ($change[change] == "yes") {
+	$rowid=$row['rowid'];
+	foreach($row['columns'] as $key => $col):
+		$change = $pretty_columns[$key]['control']->get_sql_update_from_diff($col['bef'], $col['aft']);
+		if ($change['change'] == "yes") {
 			$next = $next + 1;
 			array_push($provided_columns, $key);
 			array_push($provided_params, "$" . $next);
-			array_push($provided_values, $change[value]);
+			array_push($provided_values, $change['value']);
 		}
 	endforeach;
 endforeach;
