@@ -37,14 +37,16 @@ function get_current_global_parameters_friendly_comma_list($dbconn) {
 	$ret = "";
 
 	$count = 0;
-	foreach($gp as $param):
-		if ($count == 0) {
-			$ret = $ret . $param['value'];
-		} else {
-			$ret = $ret . ", " . $param['value'];
-		}
-		$count++;
-	endforeach;
+	if (is_array($gp)) {
+		foreach($gp as $param):
+			if ($count == 0) {
+				$ret = $ret . $param['value'];
+			} else {
+				$ret = $ret . ", " . $param['value'];
+			}
+			$count++;
+		endforeach;
+	}
 
 	return $ret;
 
