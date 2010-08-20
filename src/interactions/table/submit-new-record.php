@@ -1,5 +1,7 @@
 <?php
 
+set_include_path(get_include_path() . PATH_SEPARATOR . '../../');
+
 session_start();
 
 if ($_SESSION['connstr'] == "") {

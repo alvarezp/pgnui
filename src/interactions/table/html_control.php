@@ -1,5 +1,7 @@
 <?php
 
+set_include_path(get_include_path() . PATH_SEPARATOR . '../../');
+
 abstract class HtmlControl {
 
 	abstract public function get_supported_types();

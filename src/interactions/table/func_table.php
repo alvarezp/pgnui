@@ -1,5 +1,7 @@
 <?
 
+set_include_path(get_include_path() . PATH_SEPARATOR . '../../');
+
 function get_table_where($dbconn, $catalog, $schema, $table, $prepend = 'WHERE ') {
 
 	$columns_global_parameters = pg_query_params($dbconn, "SELECT * FROM ___pgnui_column_reference_tree.table_column_globals($1, $2, $3);", array($catalog, $schema, $table));

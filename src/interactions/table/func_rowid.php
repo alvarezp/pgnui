@@ -1,5 +1,7 @@
 <?php
 
+set_include_path(get_include_path() . PATH_SEPARATOR . '../../');
+
 function record_columns_to_rowid($table_columns, $r) {
 
 	$cid = 0;

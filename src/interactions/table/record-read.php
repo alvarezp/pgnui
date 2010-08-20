@@ -1,5 +1,7 @@
 <?php
 
+set_include_path(get_include_path() . PATH_SEPARATOR . '../../');
+
 
 function read_record_where($dbconn, $catalog, $schema, $table, $where) {
 	return pg_fetch_array(pg_query($dbconn, "SELECT * FROM $schema.$table WHERE $where"), 0, PGSQL_ASSOC);

@@ -1,5 +1,7 @@
 <?php
 
+set_include_path(get_include_path() . PATH_SEPARATOR . '../../');
+
 require_once ("html_control.php");
 
 class HtmlControlTextbox extends HtmlControl {
