@@ -19,6 +19,10 @@ $_SESSION['connstr'] = "host=localhost port=5432 dbname=$database user=$username
 $_SESSION['username'] = $_POST['username'];
 $_SESSION['database'] = $_POST['catalog'];
 
+/* Create a user schema. */
+/* FIXME: It should not re-create the schema if it already exists. */
+pg_query($dbconn, "CREATE SCHEMA AUTHORIZATION " . pg_escape_string($username));
+
 header("Location: global_parameters_chooser.php");
 
 ?>
