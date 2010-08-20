@@ -4,6 +4,8 @@ set_include_path(get_include_path() . PATH_SEPARATOR . '../../');
 
 function record_columns_to_rowid($table_columns, $r) {
 
+	$rowid = "";
+
 	$cid = 0;
 	foreach($r as $col_name => $d):
 		if ($table_columns[$cid]['position_in_pk'] > 0) {
