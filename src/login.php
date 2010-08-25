@@ -22,6 +22,7 @@ $_SESSION['database'] = $_POST['catalog'];
 /* Create a user schema. */
 /* FIXME: It should not re-create the schema if it already exists. */
 pg_query($dbconn, "CREATE SCHEMA AUTHORIZATION " . pg_escape_string($username));
+pg_query($dbconn, "CREATE TABLE " . pg_escape_string($username) . ".___pgnui_settings (name varchar, parameter varchar, value varchar);");
 
 header("Location: global_parameters_chooser.php");
 
