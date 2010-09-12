@@ -42,6 +42,10 @@ if ($columns !== NULL) {
 
 $table_pretty_name = get_best_name_for_table($dbconn, $schema, $table);
 
+require_once("record-read.php");
+
+$pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 	"http://www.w3.org/TR/html4/strict.dtd">
@@ -96,7 +100,10 @@ $table_pretty_name = get_best_name_for_table($dbconn, $schema, $table);
 <? foreach($table_rows as $r): ?>
 		<tr>
 <? 		foreach($r as $col_name => $d): ?>
-			<td><? print $d; ?></td>
+
+<?		$pretty_columns[$col_name]['control']->set_value_from_sql($d); ?>
+
+			<td><? print $pretty_columns[$col_name]['control']->get_html_static("data[0][columns][" . $col_name . "]"); ?></td>
 <? 		endforeach; ?>
 <?		require_once("func_rowid.php"); ?>
 <?		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
