@@ -35,7 +35,7 @@ function get_columns_as_keys($dbconn, $catalog, $schema, $table) {
 			} else if ($field['data_type'] == "character varying") {
 				require_once("html_control_textbox.php");
 				$pretty_columns[$field['column_name']]['control'] = new HtmlControlTextbox;
-			} else if ($field['data_type'] == "USER-DEFINED" && $field[udt_name] == "cryptmd5") {
+			} else if ($field['data_type'] == "USER-DEFINED" && $field['udt_name'] == "cryptmd5") {
 				require_once("html_control_password.php");
 				$pretty_columns[$field['column_name']]['control'] = new HtmlControlPassword;
 			} else {
