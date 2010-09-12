@@ -1,7 +1,5 @@
 <?php
 
-$default_interaction = "table";
-
 session_start();
 
 if ($_SESSION['connstr'] == "") {
@@ -19,6 +17,34 @@ $table = $_GET['table'];
 /* Al seleccionar una relación, en lugar de ir directo a table.php será
 ahora a este archivo (enter.php) para que se consiga el nombre de la vista
 que el usuario prefiere para la relación y usarla. */
+
+$allowed_interactions = array();
+
+$dir = "interactions/";
+
+if (is_dir($dir)) {
+    if ($dh = opendir($dir)) {
+        while (($file = readdir($dh)) !== false) {
+            if (is_dir($dir . $file) && substr($file, 0, 1) != ".") {
+				include($dir . $file . "/check.php");
+				$checkfunc = $file . "_check";
+				$it_fits = $checkfunc($schema, $table);
+				if ($it_fits) {
+					array_push($allowed_interactions, $file);
+				}
+			}
+        }
+        closedir($dh);
+    }
+}
+
+if (count($allowed_interactions) == 0) {
+	print ("FATAL ERROR: No available interactions found $shema.$table!");
+	return;
+} else {
+	$default_interaction = $allowed_interactions[0];
+}
+
 
 $interaction = $default_interaction;
 
