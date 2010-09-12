@@ -80,7 +80,7 @@ $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 
 <p> | 
 <? foreach((array) $tables as $t): ?>
-	<a href="?<? print $t['parameterstring']; ?>"><? print $t['pretty_name']; ?></a> | 
+	<a href="/enter.php?<? print $t['parameterstring']; ?>"><? print $t['pretty_name']; ?></a> |
 <? endforeach ?>
 </p>
 

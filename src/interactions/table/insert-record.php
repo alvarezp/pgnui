@@ -40,7 +40,7 @@ $tables = get_table_list($dbconn);
 
 <p> | 
 <? foreach((array) $tables as $t): ?>
-	<a href="table.php?<? print $t['parameterstring']; ?>"><? print $t['pretty_name']; ?></a> | 
+	<a href="/enter.php?<? print $t['parameterstring']; ?>"><? print $t['pretty_name']; ?></a> | 
 <? endforeach ?>
 </p>
 
