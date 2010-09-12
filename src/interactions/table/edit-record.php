@@ -63,7 +63,7 @@ $tables = get_table_list($dbconn);
 	<!-- COLUMN START -->
 	<div>
 	<?		$pretty_columns[$key]['control']->set_value_from_sql($column); ?>
-	<?		print $pretty_columns[$key]['pretty_name'] . ": ". $pretty_columns[$key]['control']->get_html_editable("data[0]['columns'][" . $key . "]"); ?>
+	<?		print $pretty_columns[$key]['pretty_name'] . ": ". $pretty_columns[$key]['control']->get_html_editable("data[0][columns][" . $key . "]"); ?>
 	</div>
 	<!-- COLUMN END -->
 <?		endforeach; ?>
