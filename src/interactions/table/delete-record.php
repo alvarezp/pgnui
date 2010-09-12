@@ -44,7 +44,7 @@ $tables = get_table_list($dbconn);
 
 <p> | 
 <? foreach((array) $tables as $t): ?>
-	<a href="/enter.php?<? print $t['parameterstring']; ?>"><? print $t['pretty_name']; ?></a> | 
+	<a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a> | 
 <? endforeach ?>
 </p>
 
@@ -71,9 +71,9 @@ $tables = get_table_list($dbconn);
 	Do you want to delete this record?
 	</p>
 	<form action="delete-record-confirm.php" method="POST">
-	<input type="hidden" name="schema" value="<? print $schema ?>">
-	<input type="hidden" name="table" value="<? print $table ?>">
-	<input type="hidden" name="rowid" value="<? print $rowid ?>">
+	<input type="hidden" name="schema" value="<?= $schema ?>">
+	<input type="hidden" name="table" value="<?= $table ?>">
+	<input type="hidden" name="rowid" value="<?= $rowid ?>">
 	<input name="confirmation" type="submit" value="Yes">
 	<input name="confirmation" type="submit" value="No">
 	</form>

@@ -43,7 +43,7 @@ $tables = get_table_list($dbconn);
 
 <p> | 
 <? foreach((array) $tables as $t): ?>
-	<a href="/enter.php?<? print $t['parameterstring']; ?>"><? print $t['pretty_name']; ?></a> | 
+	<a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a> | 
 <? endforeach ?>
 </p>
 
@@ -54,11 +54,11 @@ $tables = get_table_list($dbconn);
 -->
 
 <form action="submit-record.php" method="POST">
-	<input type="hidden" name="catalog" value="<? print $catalog; ?>"></input>
-	<input type="hidden" name="schema" value="<? print $schema; ?>"></input>
-	<input type="hidden" name="table" value="<? print $table; ?>"></input>
+	<input type="hidden" name="catalog" value="<?= $catalog ?>"></input>
+	<input type="hidden" name="schema" value="<?= $schema ?>"></input>
+	<input type="hidden" name="table" value="<?= $table ?>"></input>
 	<!-- ROW START -->
-	<input type="hidden" name="data[0][rowid]" value="<? print $rowid; ?>"></input>
+	<input type="hidden" name="data[0][rowid]" value="<?= $rowid ?>"></input>
 <?		foreach ($record as $key => $column): ?>
 	<!-- COLUMN START -->
 	<div>

@@ -63,7 +63,7 @@ $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 <? 		if ($table_where !== ""): ?>
 
 	<div class="global_parameters_show" id="global_parameters_show">
-	<p>Only showing records relevant to <span class="global_parameters_list"><? print $global_parameters_friendly_comma_list; ?></span>. <a href="global_parameters_chooser.php">[ Change ]</a></p>
+	<p>Only showing records relevant to <span class="global_parameters_list"><?= $global_parameters_friendly_comma_list ?></span>. <a href="global_parameters_chooser.php">[ Change ]</a></p>
 	</div>
 
 <? 		else: ?>
@@ -80,11 +80,11 @@ $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 
 <p> | 
 <? foreach((array) $tables as $t): ?>
-	<a href="/enter.php?<? print $t['parameterstring']; ?>"><? print $t['pretty_name']; ?></a> |
+	<a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a> |
 <? endforeach ?>
 </p>
 
-<h1><? print $table_pretty_name; ?></h1>
+<h1><?= $table_pretty_name ?></h1>
 
 <table>
 	<thead>
@@ -103,13 +103,13 @@ $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 
 <?		$pretty_columns[$col_name]['control']->set_value_from_sql($d); ?>
 
-			<td><? print $pretty_columns[$col_name]['control']->get_html_static("data[0][columns][" . $col_name . "]"); ?></td>
+			<td><?= $pretty_columns[$col_name]['control']->get_html_static("data[0][columns][" . $col_name . "]") ?></td>
 <? 		endforeach; ?>
 <?		require_once("func_rowid.php"); ?>
 <?		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
-			<td><a href="edit-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>&rowid=<? print $row_id; ?>">Mod</a></td>
-			<td><a href="view-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>&rowid=<? print $row_id; ?>">View</a></td>
-			<td><a href="delete-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>&rowid=<? print $row_id; ?>">Del</a></td>
+			<td><a href="edit-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Mod</a></td>
+			<td><a href="view-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">View</a></td>
+			<td><a href="delete-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Del</a></td>
 		<tr>
 <? endforeach; ?>
 	</tbody>
@@ -117,7 +117,7 @@ $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 </table>
 
 <p>
-	<a href="insert-record.php?schema=<? print $schema; ?>&table=<? print $table; ?>">Ins</a>
+	<a href="insert-record.php?schema=<?= $schema ?>&table=<?= $table ?>">Ins</a>
 </p>
 
 </body>

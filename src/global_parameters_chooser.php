@@ -38,13 +38,13 @@ if (count($columns) == 0) {
 			foreach ($s as $table => $t):
 				foreach ($t as $column => $col): ?>
 		<p>
-			<label for="<? print $column; ?>">
-			<? print "$schema.$table.$column:"; ?> 
+			<label for="<?= $column ?>">
+			<?= "$schema.$table.$column:" ?> 
 			</label>
-			<select name="globals<? print "[$catalog][$schema][$table][$column]"; ?>">
+			<select name="globals<?= "[$catalog][$schema][$table][$column]" ?>">
 				<option value="">(All)</option>
 <?					foreach ($col['values'] as $x => $v): ?>
-				<option value="<? print $v; ?>"><? print $v; ?></option>
+				<option value="<?= $v ?>"><?= $v ?></option>
 <?					endforeach; ?>
 			</select>
 		</p>
