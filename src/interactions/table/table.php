@@ -46,6 +46,9 @@ require_once("record-read.php");
 
 $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 
+require_once("func_privileges.php");
+$can_insert = has_table_privilege($dbconn, $schema . "." . $table, 'INSERT');
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 	"http://www.w3.org/TR/html4/strict.dtd">
@@ -116,9 +119,11 @@ $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 
 </table>
 
+<? if ($can_insert): ?>
 <p>
 	<a href="insert-record.php?schema=<?= $schema ?>&table=<?= $table ?>">Ins</a>
 </p>
+<? endif; ?>
 
 </body>
 
