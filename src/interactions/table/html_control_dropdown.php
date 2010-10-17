@@ -84,7 +84,7 @@ class HtmlControlDropdown extends HtmlControl {
 		$r .= "<span class='textbox' id='${basename}'>\n";
 
 		if (isset($this->value)) {
-			$r .= "<span class='textbox_known'>$this->value</span>\n";
+			$r .= "<span class='textbox_known'>" . htmlspecialchars($this->value) . "</span>\n";
 		} else {
 			$r .= "<span class='textbox_unknown'>Not set</span>\n";
 		}
