@@ -2,11 +2,13 @@
 
 DROP SCHEMA ___pgnui_information_schema CASCADE;
 CREATE SCHEMA ___pgnui_information_schema;
+GRANT USAGE ON SCHEMA ___pgnui_information_schema TO public;
 
 DROP VIEW ___pgnui_information_schema.key_column_usage CASCADE;
 CREATE VIEW ___pgnui_information_schema.key_column_usage AS
 SELECT constraint_catalog, constraint_schema, constraint_name, table_catalog, table_schema, table_name, column_name, ordinal_position, COALESCE(position_in_unique_constraint, '1') AS position_in_unique_constraint
 FROM information_schema.key_column_usage;
+GRANT SELECT ON ___pgnui_information_schema.key_column_usage TO public;
 
 DROP VIEW ___pgnui_information_schema.table_constraints CASCADE;
 CREATE VIEW ___pgnui_information_schema.table_constraints AS
@@ -76,3 +78,4 @@ WHERE nr.oid = r.relnamespace
 		OR has_table_privilege(r.oid, 'TRIGGER'::text))
 ;
 
+GRANT SELECT ON ___pgnui_information_schema.table_constraints TO public;

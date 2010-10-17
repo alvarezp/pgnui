@@ -2,6 +2,7 @@ CREATE LANGUAGE 'plpgsql';
 
 DROP SCHEMA ___pgnui_column_reference_tree CASCADE;
 CREATE SCHEMA ___pgnui_column_reference_tree;
+GRANT USAGE ON SCHEMA ___pgnui_column_reference_tree TO public;
 
 DROP VIEW ___pgnui_column_reference_tree.column_reference_tree;
 CREATE VIEW ___pgnui_column_reference_tree.column_reference_tree AS
@@ -18,6 +19,7 @@ FROM
 		AND rt.unique_constraint_name = ref.constraint_name
 		AND rc.position_in_unique_constraint = ref.ordinal_position
 ;
+GRANT SELECT ON ___pgnui_column_reference_tree.column_reference_tree TO public;
 
 DROP TYPE ___pgnui_column_reference_tree.column_def CASCADE;
 CREATE TYPE ___pgnui_column_reference_tree.column_def AS (catalog_name varchar, schema_name varchar, table_name varchar, column_name varchar);
@@ -56,6 +58,7 @@ BEGIN
 END
 $$ LANGUAGE 'plpgsql';
 
+GRANT EXECUTE ON FUNCTION ___pgnui_column_reference_tree.column_source(_catalog varchar, _schema varchar, _table varchar, _column varchar, OUT root_catalog varchar, OUT root_schema varchar, OUT root_table varchar, OUT root_column varchar) TO public;
 
 
 DROP FUNCTION ___pgnui_column_reference_tree.global_parameters() CASCADE;
@@ -80,6 +83,7 @@ BEGIN
 
 END
 $$ LANGUAGE 'plpgsql';
+GRANT EXECUTE ON FUNCTION ___pgnui_column_reference_tree.global_parameters() TO public;
 
 DROP TYPE ___pgnui_column_reference_tree.column_dep CASCADE;
 CREATE TYPE ___pgnui_column_reference_tree.column_dep AS (catalog_name varchar, schema_name varchar, table_name varchar, column_name varchar, dep_catalog_name varchar, dep_schema_name varchar, dep_table_name varchar, dep_column_name varchar);
@@ -108,6 +112,7 @@ BEGIN
 
 END
 $$ LANGUAGE 'plpgsql';
+GRANT EXECUTE ON FUNCTION ___pgnui_column_reference_tree.table_column_sources(_catalog varchar, _schema varchar, _table varchar) TO public;
 
 DROP FUNCTION ___pgnui_column_reference_tree.table_column_globals(_catalog varchar, _schema varchar, _table varchar) CASCADE;
 CREATE OR REPLACE FUNCTION ___pgnui_column_reference_tree.table_column_globals(_catalog varchar, _schema varchar, _table varchar) RETURNS SETOF ___pgnui_column_reference_tree.column_dep AS $$
@@ -121,6 +126,7 @@ CREATE OR REPLACE FUNCTION ___pgnui_column_reference_tree.table_column_globals(_
 			AND gp.column_name = cd.dep_column_name;
 
 $$ LANGUAGE 'SQL';
+GRANT EXECUTE ON FUNCTION ___pgnui_column_reference_tree.table_column_globals(_catalog varchar, _schema varchar, _table varchar) TO public;
 
 DROP VIEW ___pgnui_column_reference_tree.column_foreign_key_references CASCADE;
 CREATE VIEW ___pgnui_column_reference_tree.column_foreign_key_references AS
@@ -136,6 +142,7 @@ FROM
 		AND rt.unique_constraint_name = ref.constraint_name
 		AND rc.position_in_unique_constraint = ref.ordinal_position
 ;
+GRANT SELECT ON "___pgnui_column_reference_tree"."column_foreign_key_references" TO public;
 
 DROP FUNCTION ___pgnui_column_reference_tree.column_foreign_key_references_table(_catalog varchar, _schema varchar, _table varchar);
 CREATE FUNCTION ___pgnui_column_reference_tree.column_foreign_key_references_table(_catalog varchar, _schema varchar, _table varchar) RETURNS SETOF ___pgnui_column_reference_tree.column_foreign_key_references AS $$
@@ -143,10 +150,12 @@ CREATE FUNCTION ___pgnui_column_reference_tree.column_foreign_key_references_tab
 	FROM ___pgnui_column_reference_tree.column_foreign_key_references
 	WHERE rc_catalog = $1 AND rc_schema = $2 AND rc_table = $3;
 $$ LANGUAGE SQL;
+GRANT EXECUTE ON FUNCTION ___pgnui_column_reference_tree.column_foreign_key_references_table(_catalog varchar, _schema varchar, _table varchar) TO public;
 
 
 CREATE VIEW ___pgnui_column_reference_tree.primary_keys AS
     SELECT table_constraints.table_catalog, table_constraints.table_schema, table_constraints.table_name, key_column_usage.column_name, key_column_usage.ordinal_position FROM (information_schema.table_constraints NATURAL JOIN information_schema.key_column_usage) WHERE ((table_constraints.constraint_type)::text = 'PRIMARY KEY'::text);
+GRANT SELECT ON ___pgnui_column_reference_tree.primary_keys TO public;
 
 DROP VIEW ___pgnui_column_reference_tree.uniq_inside_fk CASCADE;
 CREATE VIEW ___pgnui_column_reference_tree.uniq_inside_fk AS
@@ -187,4 +196,4 @@ WHERE
 	AND uniq.constraint_schema::text = fk.constraint_schema::text
 	AND uniq.table_name::text = fk.table_name::text
 ;
-
+GRANT SELECT ON ___pgnui_column_reference_tree.uniq_inside_fk TO public;
