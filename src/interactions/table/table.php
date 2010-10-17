@@ -99,14 +99,14 @@ $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 	<tbody>
 <? foreach($table_rows as $r): ?>
 		<tr>
+<?		require_once("func_rowid.php"); ?>
+<?		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
 <? 		foreach($r as $col_name => $d): ?>
 
 <?		$pretty_columns[$col_name]['control']->set_value_from_sql($d); ?>
 
-			<td><?= $pretty_columns[$col_name]['control']->get_html_static("data[0][columns][" . $col_name . "]") ?></td>
+			<td><?= $pretty_columns[$col_name]['control']->get_html_static("data[$row_id][columns][" . $col_name . "]") ?></td>
 <? 		endforeach; ?>
-<?		require_once("func_rowid.php"); ?>
-<?		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
 			<td><a href="edit-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Mod</a></td>
 			<td><a href="view-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">View</a></td>
 			<td><a href="delete-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Del</a></td>
