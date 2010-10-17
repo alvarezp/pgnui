@@ -48,6 +48,10 @@ $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 
 require_once("func_privileges.php");
 $can_insert = has_table_privilege($dbconn, $schema . "." . $table, 'INSERT');
+$can_update = has_table_privilege($dbconn, $schema . "." . $table, 'UPDATE');
+$can_select = has_table_privilege($dbconn, $schema . "." . $table, 'SELECT');
+$can_delete = has_table_privilege($dbconn, $schema . "." . $table, 'DELETE');
+
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -89,6 +93,8 @@ $can_insert = has_table_privilege($dbconn, $schema . "." . $table, 'INSERT');
 
 <h1><?= $table_pretty_name ?></h1>
 
+
+<? if ($can_select): ?>
 <table>
 	<thead>
 		<tr>
@@ -110,14 +116,25 @@ $can_insert = has_table_privilege($dbconn, $schema . "." . $table, 'INSERT');
 
 			<td><?= $pretty_columns[$col_name]['control']->get_html_static("data[$row_id][columns][" . $col_name . "]") ?></td>
 <? 		endforeach; ?>
+
+<?		if ($can_update): ?>
 			<td><a href="edit-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Mod</a></td>
+<?		endif; ?>
+
+<?		if ($can_select): ?>
 			<td><a href="view-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">View</a></td>
+<?		endif; ?>
+
+<?		if ($can_delete): ?>
 			<td><a href="delete-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Del</a></td>
+<?		endif; ?>
+
 		<tr>
 <? endforeach; ?>
 	</tbody>
 
 </table>
+<? endif; ?>
 
 <? if ($can_insert): ?>
 <p>
