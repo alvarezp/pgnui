@@ -98,15 +98,15 @@ $can_delete = has_table_privilege($dbconn, $schema . "." . $table, 'DELETE');
 <table>
 	<thead>
 		<tr>
-<? foreach((array) $table_columns as $c): ?>
+<? 	foreach((array) $table_columns as $c): ?>
 			<th><? print $c['description'] == "" ? $c['column_name'] : $c['description']; ?></th>
-<? endforeach; ?>
+<? 	endforeach; ?>
 			<th></th>
 		</tr>
 	</thead>
 
 	<tbody>
-<? foreach($table_rows as $r): ?>
+<? 	foreach($table_rows as $r): ?>
 		<tr>
 <?		require_once("func_rowid.php"); ?>
 <?		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
@@ -130,7 +130,7 @@ $can_delete = has_table_privilege($dbconn, $schema . "." . $table, 'DELETE');
 <?		endif; ?>
 
 		<tr>
-<? endforeach; ?>
+<? 	endforeach; ?>
 	</tbody>
 
 </table>
