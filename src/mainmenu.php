@@ -26,13 +26,7 @@ $tables = get_table_list($dbconn);
 
 <body>
 
-<h1>Menu</h1>
-
-<p> | 
-<? foreach((array) $tables as $t): ?>
-	<a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a> | 
-<? endforeach ?>
-</p>
+<? include("menu.php"); ?>
 
 </body>
 
