@@ -2,14 +2,7 @@
 
 set_include_path(get_include_path() . PATH_SEPARATOR . '../../');
 
-session_start();
-
-if ($_SESSION['connstr'] == "") {
-	header("Location: index.php");
-	break;
-}
-
-$dbconn = pg_connect($_SESSION['connstr']);
+require_once("session.php");
 
 $catalog = $_SESSION['database'];
 $schema = $_POST['schema'];
