@@ -19,6 +19,8 @@ require_once("func_get_table_list.php");
 
 $tables = get_table_list($dbconn);
 
+$children = get_tables_referencing_this($dbconn, $catalog, $schema, $table);
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -56,6 +58,68 @@ $tables = get_table_list($dbconn);
 <?		endforeach; ?>
 	<!-- ROW END -->
 	<input type="submit">
+
+<?
+	if (count($children) >= 2):
+		$prevtable = NULL;
+		foreach ($children as $c => $column):
+			$thistable = get_best_name_for_table($dbconn, $column["rc_schema"], $column["rc_table"]);
+			$thistablelen = strlen($thistable);
+			if ($prevtable == NULL) {
+				$prevtable = $thistable;
+				$prevtablelen = $thistablelen;
+				$lowestlen = $thistablelen;
+				$highestlen = $thistablelen;
+				continue;
+			}
+			if ($thistablelen < $lowestlen) {
+				$lowestlen = $thistablelen;
+			}
+			for ($x = 0; $x < $lowestlen; $x++) {
+				if ($thistable[$thistablelen-$x] != $prevtable[$prevtablelen-$x]) {
+					break;
+				} else {
+					if ($thistable[$thistablelen-$x] == " ") {
+						$lastword = $x;
+					}
+				}
+			}
+			if ($x < $lowestlen) {
+				$lowestlen = $x;
+			}
+
+			if ($thistablelen > $highestlen) {
+				$highest = $thistablelen;
+			}
+			for ($x = 0; $x < $highestlen; $x++) {
+				if ($thistable[$x] != $prevtable[$x]) {
+					break;
+				} else {
+					if ($thistable[$x] == " ") {
+						$firstword = $x;
+					}
+				}
+			}
+			if ($x > $highest) {
+				$lowestlen = $x;
+			}
+			
+			$prevtable = $thistable;
+			$prevtablelen = $thistablelen;
+		endforeach;
+	endif;
+?>
+
+
+<?	if (count($children) > 0): ?>
+	<p>For this record, add a new:
+<?		foreach ($children as $c => $column): ?>
+	<a href="insert-record.php?schema=<?= $column["rc_schema"] ?>&table=<?= $column["rc_table"] ?>"><?= substr(get_best_name_for_table($dbconn, $column["rc_schema"], $column["rc_table"]),$firstword,-$lastword) ?></a></a> |
+<?		endforeach; ?>
+	</p>
+<?	endif; ?>
+
+	
 </form>
 
 </body>
