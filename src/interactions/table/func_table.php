@@ -77,6 +77,13 @@ function columns_ref_constraint($dbconn, $catalog, $schema, $table) {
 	return pg_fetch_all($columns_ref_constraint);
 }
 
+function get_tables_referencing_this($dbconn, $catalog, $schema, $table) {
+	$columns_ref_constraint = pg_query_params($dbconn, "SELECT * FROM ___pgnui_column_reference_tree.column_foreign_key_references WHERE ref_catalog = $1 AND ref_schema = $2 AND ref_table = $3;", array($catalog, $schema, $table));
+
+        return pg_fetch_all($columns_ref_constraint);
+
+}
+
 ?>
 
 
