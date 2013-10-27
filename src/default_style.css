@@ -26,3 +26,8 @@ td, th {
 span.global_parameters_list {
 	font-weight: bold;
 }
+
+label {
+	width: 10%;
+	display: inline-block;
+}

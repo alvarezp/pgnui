@@ -42,7 +42,7 @@ $tables = get_table_list($dbconn);
 <?		foreach ($pretty_columns as $key => $column): ?>
 	<!-- COLUMN START -->
 	<div>
-	<?		print $pretty_columns[$key]['pretty_name'] . ": ". $pretty_columns[$key]['control']->get_html_editable("data[0][columns][" . $key . "]"); ?>
+		<label class="insert" for="data[0][columns][<?= $key ?>]"><?= $pretty_columns[$key]['pretty_name'] ?>: </label><?=$pretty_columns[$key]['control']->get_html_editable("data[0][columns][" . $key . "]"); ?>
 	</div>
 	<!-- COLUMN END -->
 <?		endforeach; ?>

@@ -49,8 +49,8 @@ $tables = get_table_list($dbconn);
 <?		foreach ($record as $key => $column): ?>
 	<!-- COLUMN START -->
 	<div>
-	<?		$pretty_columns[$key]['control']->set_value_from_sql($column); ?>
-	<?		print $pretty_columns[$key]['pretty_name'] . ": ". $pretty_columns[$key]['control']->get_html_editable("data[0][columns][" . $key . "]"); ?>
+<?		$pretty_columns[$key]['control']->set_value_from_sql($column); ?>
+		<label class="update" for="data[0][columns][<?= $key ?>]"><?= $pretty_columns[$key]['pretty_name'] ?>: </label><?= $pretty_columns[$key]['control']->get_html_editable("data[0][columns][" . $key . "]"); ?>
 	</div>
 	<!-- COLUMN END -->
 <?		endforeach; ?>
