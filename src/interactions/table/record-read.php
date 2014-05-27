@@ -30,8 +30,8 @@ function get_columns_as_keys($dbconn, $catalog, $schema, $table) {
 			$r = $refs[0];
 
 			if ($field['data_type'] == "boolean") {
-				require_once("html_control_checkbox.php");
-				$pretty_columns[$field['column_name']]['control'] = new HtmlControlCheckbox;
+				require_once("html_control_textbox.php");
+				$pretty_columns[$field['column_name']]['control'] = new HtmlControlTextbox;
 			} else if ($field['data_type'] == "character varying") {
 				require_once("html_control_textbox.php");
 				$pretty_columns[$field['column_name']]['control'] = new HtmlControlTextbox;
