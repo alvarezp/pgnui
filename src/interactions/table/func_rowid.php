@@ -15,7 +15,7 @@ function record_columns_to_rowid($table_columns, $r) {
 		$cid++;
 	endforeach;
 
-	return $rowid;
+	return urlencode($rowid);
 }
 
 function rowid_to_record_columns($rowid) {
