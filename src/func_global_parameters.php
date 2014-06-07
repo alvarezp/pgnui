@@ -24,6 +24,13 @@ function get_global_parameters_options($dbconn) {
 
 function get_current_global_parameters($dbconn) {
 
+	$t = pg_query_params($dbconn, "SELECT ___pgnui_functions.if_table_exists($1, $2, $3)", array($_SESSION['database'], $_SESSION['username'], '___pgnui_global_parameters_values'));
+	$r = pg_fetch_result($t, 0, 0);
+
+	if ($r != 't') {
+		pg_query($dbconn, "CREATE TABLE ___pgnui_global_parameters_values (LIKE ___pgnui_user_settings_skel.global_parameters_values INCLUDING CONSTRAINTS)");
+	}
+
 	$columns_global_parameters = pg_query($dbconn, "SELECT * FROM ___pgnui_global_parameters_values;");
 
 	return pg_fetch_all($columns_global_parameters);
