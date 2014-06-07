@@ -16,6 +16,7 @@ $pretty_columns = get_columns_as_keys($dbconn, $catalog, $schema, $table);
 
 
 require_once("func_get_table_list.php");
+require_once("func_table.php");
 
 $tables = get_table_list($dbconn);
 
@@ -60,7 +61,7 @@ $children = get_tables_referencing_this($dbconn, $catalog, $schema, $table);
 	<input type="submit">
 
 <?
-	if (count($children) >= 2):
+	if (($children !== FALSE) && (count($children) >= 2)):
 		$prevtable = NULL;
 		foreach ($children as $c => $column):
 			$thistable = get_best_name_for_table($dbconn, $column["rc_schema"], $column["rc_table"]);
@@ -111,7 +112,7 @@ $children = get_tables_referencing_this($dbconn, $catalog, $schema, $table);
 ?>
 
 
-<?	if (count($children) > 0): ?>
+<?	if (($children !== FALSE) && (count($children) > 0)): ?>
 	<p>For this record, add a new:
 <?		foreach ($children as $c => $column): ?>
 	<a href="insert-record.php?schema=<?= $column["rc_schema"] ?>&table=<?= $column["rc_table"] ?>"><?= substr(get_best_name_for_table($dbconn, $column["rc_schema"], $column["rc_table"]),$firstword,-$lastword) ?></a></a> |
