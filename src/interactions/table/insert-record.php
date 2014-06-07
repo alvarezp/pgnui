@@ -29,7 +29,7 @@ $tables = get_table_list($dbconn);
 
 <body>
 
-<? include("menu.php"); ?>
+<?php include("menu.php"); ?>
 
 <h1>Insert new record</h1>
 
@@ -39,13 +39,13 @@ $tables = get_table_list($dbconn);
 	<input type="hidden" name="table" value="<?= $table ?>"></input>
 	<!-- ROW START -->
 	<input type="hidden" name="data[0][rowid]" value=""></input>
-<?		foreach ($pretty_columns as $key => $column): ?>
+<?php		foreach ($pretty_columns as $key => $column): ?>
 	<!-- COLUMN START -->
 	<div>
 		<label class="insert" for="data[0][columns][<?= $key ?>]"><?= $pretty_columns[$key]['pretty_name'] ?>: </label><?=$pretty_columns[$key]['control']->get_html_editable("data[0][columns][" . $key . "]"); ?>
 	</div>
 	<!-- COLUMN END -->
-<?		endforeach; ?>
+<?php		endforeach; ?>
 	<!-- ROW END -->
 	<input type="submit">
 </form>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 require_once("session.php");
 
@@ -26,7 +26,7 @@ if (count($columns) == 0) {
 	<p>Please choose the global variables:</p>
 	<form action="global_parameters_send.php" method="post">
 
-<?	foreach ($columns as $catalog => $c):
+<?php	foreach ($columns as $catalog => $c):
 		foreach ($c as $schema => $s):
 			foreach ($s as $table => $t):
 				foreach ($t as $column => $col): ?>
@@ -36,12 +36,12 @@ if (count($columns) == 0) {
 			</label>
 			<select name="globals<?= "[$catalog][$schema][$table][$column]" ?>">
 				<option value="">(All)</option>
-<?					foreach ($col['values'] as $x => $v): ?>
+<?php					foreach ($col['values'] as $x => $v): ?>
 				<option value="<?= $v ?>"><?= $v ?></option>
-<?					endforeach; ?>
+<?php					endforeach; ?>
 			</select>
 		</p>
-<?				endforeach;
+<?php				endforeach;
 			endforeach;
 		endforeach;
 	endforeach; ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 function get_best_name_for_this_database($dbconn) {
 

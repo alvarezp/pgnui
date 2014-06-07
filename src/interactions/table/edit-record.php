@@ -35,11 +35,11 @@ $children = get_tables_referencing_this($dbconn, $catalog, $schema, $table);
 
 <body>
 
-<? include("menu.php"); ?>
+<?php include("menu.php"); ?>
 
 <!--<pre>
-<? print_r ($record); ?>
-<? print_r ($pretty_columns); ?>
+<?php print_r ($record); ?>
+<?php print_r ($pretty_columns); ?>
 </pre>
 -->
 
@@ -49,18 +49,18 @@ $children = get_tables_referencing_this($dbconn, $catalog, $schema, $table);
 	<input type="hidden" name="table" value="<?= $table ?>"></input>
 	<!-- ROW START -->
 	<input type="hidden" name="data[0][rowid]" value="<?= $rowid ?>"></input>
-<?		foreach ($record as $key => $column): ?>
+<?php		foreach ($record as $key => $column): ?>
 	<!-- COLUMN START -->
 	<div>
-<?		$pretty_columns[$key]['control']->set_value_from_sql($column); ?>
+<?php		$pretty_columns[$key]['control']->set_value_from_sql($column); ?>
 		<label class="update" for="data[0][columns][<?= $key ?>]"><?= $pretty_columns[$key]['pretty_name'] ?>: </label><?= $pretty_columns[$key]['control']->get_html_editable("data[0][columns][" . $key . "]"); ?>
 	</div>
 	<!-- COLUMN END -->
-<?		endforeach; ?>
+<?php		endforeach; ?>
 	<!-- ROW END -->
 	<input type="submit">
 
-<?
+<?php
 	if (($children !== FALSE) && (count($children) >= 2)):
 		$prevtable = NULL;
 		foreach ($children as $c => $column):
@@ -112,13 +112,13 @@ $children = get_tables_referencing_this($dbconn, $catalog, $schema, $table);
 ?>
 
 
-<?	if (($children !== FALSE) && (count($children) > 0)): ?>
+<?php	if (($children !== FALSE) && (count($children) > 0)): ?>
 	<p>For this record, add a new:
-<?		foreach ($children as $c => $column): ?>
+<?php		foreach ($children as $c => $column): ?>
 	<a href="insert-record.php?schema=<?= $column["rc_schema"] ?>&table=<?= $column["rc_table"] ?>"><?= substr(get_best_name_for_table($dbconn, $column["rc_schema"], $column["rc_table"]),$firstword,-$lastword) ?></a></a> |
-<?		endforeach; ?>
+<?php		endforeach; ?>
 	</p>
-<?	endif; ?>
+<?php	endif; ?>
 
 	
 </form>

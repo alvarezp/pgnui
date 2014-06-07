@@ -33,25 +33,25 @@ $tables = get_table_list($dbconn);
 
 <body>
 
-<? include("menu.php"); ?>
+<?php include("menu.php"); ?>
 
 <!--<pre>
-<? print_r ($record); ?>
-<? print_r ($pretty_columns); ?>
+<?php print_r ($record); ?>
+<?php print_r ($pretty_columns); ?>
 </pre>
 -->
 
 <h1>Delete record</h1>
 
 	<!-- ROW START -->
-<?		foreach ($record as $key => $column): ?>
+<?php		foreach ($record as $key => $column): ?>
 	<!-- COLUMN START -->
 	<div>
-<?		$pretty_columns[$key]['control']->set_value_from_sql($column); ?>
+<?php		$pretty_columns[$key]['control']->set_value_from_sql($column); ?>
 		<label class="delete" for="data[0][columns][<?= $key ?>]"><?= $pretty_columns[$key]['pretty_name'] ?>: </label><?= $pretty_columns[$key]['control']->get_html_static("data[0]['columns'][" . $key . "]"); ?>
 	</div>
 	<!-- COLUMN END -->
-<?		endforeach; ?>
+<?php		endforeach; ?>
 	<!-- ROW END -->
 
 	<p>

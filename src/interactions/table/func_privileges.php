@@ -1,4 +1,4 @@
-<?
+<?php
 function has_table_privilege($dbconn, $table, $privilege) {
 	$can_insert_r = pg_query_params($dbconn, "SELECT has_table_privilege($1, $2);", array($table, $privilege));
 	if ($can_insert_r != NULL) {

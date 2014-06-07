@@ -1,4 +1,4 @@
-<?
+<?php
 
 function get_global_parameters_options($dbconn) {
 

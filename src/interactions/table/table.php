@@ -73,87 +73,87 @@ $parents = $parents_with_insert_privs;
 
 <body>
 
-<? if ($columns !== NULL): ?>
+<?php if ($columns !== NULL): ?>
 
-<? 		if ($table_where !== ""): ?>
+<?php 		if ($table_where !== ""): ?>
 
 	<div class="global_parameters_show" id="global_parameters_show">
 	<p>Only showing records relevant to <span class="global_parameters_list"><?= $global_parameters_friendly_comma_list ?></span>. <a href="global_parameters_chooser.php">[ Change ]</a></p>
 	</div>
 
-<? 		else: ?>
+<?php 		else: ?>
 
 	<div class="global_parameters_show" id="global_parameters_show">
 	<p>Not limiting records by relevance. <a href="global_parameters_chooser.php">[ Change ]</a></p>
 	</div>
 
-<? 		endif; ?>
+<?php 		endif; ?>
 
-<? endif; ?>
+<?php endif; ?>
 
-<? include("menu.php"); ?>
+<?php include("menu.php"); ?>
 
 <h1><?= $table_pretty_name ?></h1>
 
 
-<? if ($can_select): ?>
+<?php if ($can_select): ?>
 <table>
 	<thead>
 		<tr>
-<? 	foreach((array) $table_columns as $c): ?>
-			<th><? print $c['description'] == "" ? $c['column_name'] : $c['description']; ?></th>
-<? 	endforeach; ?>
+<?php 	foreach((array) $table_columns as $c): ?>
+			<th><?php print $c['description'] == "" ? $c['column_name'] : $c['description']; ?></th>
+<?php 	endforeach; ?>
 			<th></th>
 		</tr>
 	</thead>
 
 	<tbody>
-<? 	foreach($table_rows as $r): ?>
+<?php 	foreach($table_rows as $r): ?>
 		<tr>
-<?		require_once("func_rowid.php"); ?>
-<?		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
-<? 		foreach($r as $col_name => $d): ?>
+<?php		require_once("func_rowid.php"); ?>
+<?php		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
+<?php 		foreach($r as $col_name => $d): ?>
 
-<?		$pretty_columns[$col_name]['control']->set_value_from_sql($d); ?>
+<?php		$pretty_columns[$col_name]['control']->set_value_from_sql($d); ?>
 
 			<td><?= $pretty_columns[$col_name]['control']->get_html_static("data[$row_id][columns][" . $col_name . "]") ?></td>
-<? 		endforeach; ?>
+<?php 		endforeach; ?>
 
-<?		if ($can_update): ?>
+<?php		if ($can_update): ?>
 			<td><a href="edit-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Mod</a></td>
-<?		endif; ?>
+<?php		endif; ?>
 
-<?		if ($can_select): ?>
+<?php		if ($can_select): ?>
 			<td><a href="view-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">View</a></td>
-<?		endif; ?>
+<?php		endif; ?>
 
-<?		if ($can_delete): ?>
+<?php		if ($can_delete): ?>
 			<td><a href="delete-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Del</a></td>
-<?		endif; ?>
+<?php		endif; ?>
 
-<?		if ($can_delete): ?>
+<?php		if ($can_delete): ?>
 			<td><a href="duplicate-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Sim</a></td>
-<?		endif; ?>
+<?php		endif; ?>
 
 		<tr>
-<? 	endforeach; ?>
+<?php 	endforeach; ?>
 	</tbody>
 
 </table>
-<? endif; ?>
+<?php endif; ?>
 
-<? if ($can_insert): ?>
+<?php if ($can_insert): ?>
 <p>
 	<a href="insert-record.php?schema=<?= $schema ?>&table=<?= $table ?>">Ins</a>
 </p>
-<? endif; ?>
+<?php endif; ?>
 
-<? if (count($parents) > 0): ?>
+<?php if (count($parents) > 0): ?>
 <h1>Referenced tables</h1>
-<? 	foreach($parents as $p): ?>
+<?php 	foreach($parents as $p): ?>
 	<p><a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a></p>
-<?	endforeach; ?>
-<? endif ?>
+<?php	endforeach; ?>
+<?php endif ?>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 function get_best_name_for_table($dbconn, $this_table_schema, $this_table_table) {
 

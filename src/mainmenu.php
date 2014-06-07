@@ -19,7 +19,7 @@ $tables = get_table_list($dbconn);
 
 <body>
 
-<? include("menu.php"); ?>
+<?php include("menu.php"); ?>
 
 </body>
 
