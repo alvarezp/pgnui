@@ -46,7 +46,7 @@ function get_columns_as_keys($dbconn, $catalog, $schema, $table) {
 			if (count($r) > 0) {
 				require_once("html_control_dropdown.php");
 				$pretty_columns[$field['column_name']]['control'] = new HtmlControlDropdown;
-				$values = pg_fetch_all(pg_query("SELECT " . $r['ref_column'] . " FROM " . $r['ref_schema'] . "." . $r['ref_table'] . " " . get_table_where($dbconn, $catalog, $r['ref_schema'], $r['ref_table']) . ";"));
+				$values = pg_fetch_all(pg_query("SELECT DISTINCT " . $r['ref_column'] . " FROM " . $r['ref_schema'] . "." . $r['ref_table'] . " " . get_table_where($dbconn, $catalog, $r['ref_schema'], $r['ref_table']) . ";"));
 				$pretty_columns[$field['column_name']]['control']->set_option_list($values);
 			}
 
