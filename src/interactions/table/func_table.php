@@ -84,6 +84,13 @@ function get_tables_referencing_this($dbconn, $catalog, $schema, $table) {
 
 }
 
+function get_tables_referenced_by_this($dbconn, $catalog, $schema, $table) {
+	$columns_ref_constraint = pg_query_params($dbconn, "SELECT DISTINCT ref_schema, ref_table FROM ___pgnui_column_reference_tree.column_foreign_key_references WHERE rc_catalog = $1 AND rc_schema = $2 AND rc_table = $3;", array($catalog, $schema, $table));
+
+        return pg_fetch_all($columns_ref_constraint);
+
+}
+
 ?>
 
 

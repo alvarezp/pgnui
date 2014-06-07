@@ -45,6 +45,21 @@ $can_update = has_table_privilege($dbconn, $schema . "." . $table, 'UPDATE');
 $can_select = has_table_privilege($dbconn, $schema . "." . $table, 'SELECT');
 $can_delete = has_table_privilege($dbconn, $schema . "." . $table, 'DELETE');
 
+$parents_with_insert_privs = array();
+$referenced_tables = get_tables_referenced_by_this($dbconn, $catalog, $schema, $table);
+if ($referenced_tables != FALSE) foreach ($referenced_tables as $rt) {
+	$rt_schema = $rt['ref_schema'];
+	$rt_table = $rt['ref_table'];
+	if (has_table_privilege($dbconn, $rt_schema . "." . $rt_table, 'INSERT')) {
+		$parent_to_insert = array();
+		$parent_to_insert['pretty_name'] = get_best_name_for_table($dbconn, $rt_schema, $rt_table);
+		$parent_to_insert['schema'] = $rt_schema;
+		$parent_to_insert['table'] = $rt_table;
+		array_push($parents_with_insert_privs, $parent_to_insert);
+	}
+}
+
+$parents = $parents_with_insert_privs;
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -129,6 +144,12 @@ $can_delete = has_table_privilege($dbconn, $schema . "." . $table, 'DELETE');
 </p>
 <? endif; ?>
 
+<? if (count($parents) > 0): ?>
+<h1>Referenced tables</h1>
+<? 	foreach($parents as $p): ?>
+	<p><a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a></p>
+<?	endforeach; ?>
+<? endif ?>
 </body>
 
 </html>
