@@ -131,6 +131,10 @@ $parents = $parents_with_insert_privs;
 			<td><a href="delete-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Del</a></td>
 <?		endif; ?>
 
+<?		if ($can_delete): ?>
+			<td><a href="duplicate-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Sim</a></td>
+<?		endif; ?>
+
 		<tr>
 <? 	endforeach; ?>
 	</tbody>

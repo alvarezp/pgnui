@@ -52,18 +52,22 @@ class HtmlControlDropdown extends HtmlControl {
 
 		if (isset($this->value)) {
 			$r .= "<input type='hidden' name='${basename}[bef][value]' value='$this->value'></input>\n";
-			$r .= "<select id='${basename}[aft][value]' type='text' name='${basename}[aft][value]' class='dropdown' value='$this->value'>";
+			$r .= "<select id='${basename}[aft][value]' type='text' name='${basename}[aft][value]' class='dropdown'>";
 			if ($this->option_list) {
 				foreach ($this->option_list as $v) {
 					foreach ($v as $f) {
-						$r .= " <option value='$f'>$f</option>";
+						if ($this->value == $f) {
+							$r .= " <option value='$f' selected>$f</option>";
+						} else {
+							$r .= " <option value='$f'>$f</option>";
+						}
 					}
 				}
 			}
 			$r .= "</select>\n";
 		} else {
 			$r .= "<input type='hidden' name='${basename}[bef][value]' value=''></input>\n";
-			$r .= "<select id='${basename}[aft][value]' type='text' name='${basename}[aft][value]' class='dropdown' value=''>";
+			$r .= "<select id='${basename}[aft][value]' type='text' name='${basename}[aft][value]' class='dropdown'>";
 			if ($this->option_list) {
 				foreach ($this->option_list as $v) {
 					foreach ($v as $f) {
