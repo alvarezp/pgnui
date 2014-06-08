@@ -7,6 +7,10 @@ $username=$_POST['username'];
 $password=$_POST['password'];
 $database=$_POST['catalog'];
 
+if ($database == "") {
+	$database = $username;
+}
+
 // FIXME: Sanitize input values.
 $dbconn=pg_connect("host=localhost port=5432 dbname=$database user=$username password=$password");
 
@@ -16,8 +20,8 @@ if (!$dbconn) {
 }
 
 $_SESSION['connstr'] = "host=localhost port=5432 dbname=$database user=$username password=$password";
-$_SESSION['username'] = $_POST['username'];
-$_SESSION['database'] = $_POST['catalog'];
+$_SESSION['username'] = $username;
+$_SESSION['database'] = $database;
 
 /* Create a user schema. */
 /* FIXME: It should not re-create the schema if it already exists. */
