@@ -1,7 +1,7 @@
 About
 =====
 
-pgnui is an attempt to a generic frontend for PostgreSQL databaes.
+pgnui is an attempt to a generic frontend for PostgreSQL databases.
 
 The concept is that once you have a database schema created, you should have
 the best possible generic frontend with no coding needed. The other way should
