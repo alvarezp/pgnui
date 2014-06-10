@@ -125,18 +125,18 @@ $parents = $parents_with_insert_privs;
 
 <body>
 
-<?php if ($columns !== NULL): ?>
+<?php if (($columns !== NULL) and (count($columns) > 0)): ?>
 
 <?php 		if ($table_where !== ""): ?>
 
 	<div class="global_parameters_show" id="global_parameters_show">
-	<p>Only showing records relevant to <span class="global_parameters_list"><?= $global_parameters_friendly_comma_list ?></span>. <a href="global_parameters_chooser.php">[ Change ]</a></p>
+	<p>Only showing records relevant to <span class="global_parameters_list"><?= $global_parameters_friendly_comma_list ?></span>. <a href="/global_parameters_chooser.php">[ Change ]</a></p>
 	</div>
 
 <?php 		else: ?>
 
 	<div class="global_parameters_show" id="global_parameters_show">
-	<p>Not limiting records by relevance. <a href="global_parameters_chooser.php">[ Change ]</a></p>
+	<p>Not limiting records by relevance. <a href="/global_parameters_chooser.php">[ Change ]</a></p>
 	</div>
 
 <?php 		endif; ?>
