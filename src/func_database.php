@@ -13,7 +13,7 @@ function get_best_name_for_this_database($dbconn) {
 		if ($comment != "") {
 			return $comment;
 		} else {
-			return $rawname;
+			return ucfirst($rawname);
 		}
 
 }
