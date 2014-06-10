@@ -7,11 +7,14 @@ require_once("session.php");
 $catalog = $_SESSION['database'];
 $schema = $_GET['schema'];
 $table = $_GET['table'];
+$sort = isset($_GET['sort']) ? $_GET['sort'] : "";
 
 require_once("func_table.php");
 
+require_once("func_sort_to_order.php");
+
 $table_where = get_table_where($dbconn, $catalog, $schema, $table);
-$table_rows = get_table_rows_where($dbconn, $catalog, $schema, $table, $table_where);
+$table_rows = get_table_rows_where_order($dbconn, $catalog, $schema, $table, $table_where, sort_to_order($sort));
 
 if ($table_rows == FALSE) {
 	$table_rows = array();
@@ -24,6 +27,8 @@ require_once("func_get_table_list.php");
 
 $tables = get_table_list($dbconn);
 
+$thistable_parameterstring = "schema=" . urlencode($schema) . "&table=" . urlencode($table);
+
 require_once("func_global_parameters.php");
 
 $columns = get_global_parameters_options($dbconn);
@@ -32,6 +37,49 @@ if ($columns !== NULL) {
 	$global_parameters_friendly_comma_list = get_current_global_parameters_friendly_comma_list($dbconn);
 }
 
+function remove_column_from_sort($sort, $column) {
+	$s = ";" . trim($sort, ";") . ";";
+	if ($s == ";;") {
+		return array("", "", "", FALSE, 0);
+	}
+	$search = ";" . $column . ":";
+	$search_len = strlen($search);
+	$col_location = strpos($s, $search);
+	if ($col_location === FALSE) {
+		return array($sort, "", "", FALSE, 0);
+	}
+	$col_location = $col_location + 1;
+	$col_length = $search_len - 2;
+	$order_location = $col_location + $col_length + 1;
+	$order_length = strpos($s, ";", $col_location + $col_length + 1) - ($col_location + $col_length + 1);
+	$return_new = trim(substr($s, 0, $col_location) . substr($s, $order_location + $order_length + 1), ";");
+	$return_column = trim(substr($s, $col_location, $col_length), ";:");
+	$return_order = trim(substr($s, $order_location, $order_length), ";:");
+
+	return array($return_new, $return_column, $return_order, $col_location == 1, substr_count($sort, ";", 0, $col_location));
+}
+
+function invert_sort_direction($string) {
+	return $string == "asc" ? "desc" : "asc";
+}
+
+function original_or_asc($string) {
+	return $string == "" ? "asc" : $string;
+}
+
+foreach ($table_columns as $k => $c) {
+	# sort=col1:asc;col2:desc
+	$cleaned_sort = remove_column_from_sort($sort, $c['column_name']);
+	if ($cleaned_sort[3]) {
+		$new_direction = invert_sort_direction($cleaned_sort[2]);
+	} else {
+		$new_direction = original_or_asc($cleaned_sort[2]);
+	}
+	$table_columns[$k]['new_sortparam'] =  trim($c['column_name'] . ':' . $new_direction . ';' . $cleaned_sort[0], ";");
+	$table_columns[$k]['sort_state_dir'] = $cleaned_sort[2];
+	$table_columns[$k]['sort_state_order'] = $cleaned_sort[4] + 1;
+	$table_columns[$k]['sort_state_html'] = $cleaned_sort[2] == "desc" ? "<span class='sub'>" . $table_columns[$k]['sort_state_order'] . "</span>" : ($cleaned_sort[2] == "asc" ? "<span class='sup'>" . $table_columns[$k]['sort_state_order'] . "</span>" : "");
+}
 
 $table_pretty_name = get_best_name_for_table($dbconn, $schema, $table);
 
@@ -69,6 +117,10 @@ $parents = $parents_with_insert_privs;
 
 <head>
 	<link rel="stylesheet" href="default_style.css" type="text/css">
+	<style type="text/css">
+		.sup { font-size: 70%; vertical-align: top; }
+		.sub { font-size: 70%; vertical-align: bottom; }
+	</style>
 </head>
 
 <body>
@@ -101,9 +153,9 @@ $parents = $parents_with_insert_privs;
 	<thead>
 		<tr>
 <?php 	foreach((array) $table_columns as $c): ?>
-			<th><?php print $c['description'] == "" ? $c['column_name'] : $c['description']; ?></th>
+			<th><a href="?<?= $thistable_parameterstring . '&sort=' . $c['new_sortparam'] ?>"><?= $c['description'] == "" ? $c['column_name'] : $c['description'] ?></a> <?= $c['sort_state_html'] ?></th>
 <?php 	endforeach; ?>
-			<th></th>
+			<th><a href="?<?= $thistable_parameterstring ?>">x</a></th>
 		</tr>
 	</thead>
 

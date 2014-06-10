@@ -64,6 +64,16 @@ function get_table_rows_where($dbconn, $catalog, $schema, $table, $where) {
 
 }
 
+function get_table_rows_where_order($dbconn, $catalog, $schema, $table, $where, $order) {
+
+	$rows = pg_query_params($dbconn, "SELECT * FROM $schema.$table $where $order;", array());
+
+	$all_rows = pg_fetch_all($rows);
+
+	return $all_rows;
+
+}
+
 function get_all_columns($dbconn, $catalog, $schema, $table) {
 	$all_columns = pg_query_params($dbconn, "SELECT c.table_catalog, c.table_schema, c.table_name, c.column_name, c.ordinal_position, pk.ordinal_position AS position_in_pk, col_description('${schema}.${table}'::regclass, (SELECT ordinal_position FROM information_schema.columns AS lcolumns WHERE table_schema = $1 AND table_name = $2 AND column_name = c.column_name)) AS description FROM information_schema.columns AS c LEFT JOIN ___pgnui_column_reference_tree.primary_keys AS pk USING (table_catalog, table_schema, table_name, column_name) WHERE c.table_schema = $1 AND c.table_name = $2 ORDER BY c.ordinal_position", array($schema, $table));
 
