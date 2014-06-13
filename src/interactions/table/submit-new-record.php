@@ -23,7 +23,7 @@ pg_query("BEGIN;");
 foreach($data as $row):
 	$rowid=$row['rowid'];
 	foreach($row['columns'] as $key => $col):
-		$change = $pretty_columns[$key]['control']->get_sql_update_from_diff($col['bef'], $col['aft']);
+		$change = $pretty_columns[$key]['control']->get_sql_update_from_diff("", $col['aft']);
 		if ($change['change'] == "yes") {
 			$next = $next + 1;
 			array_push($provided_columns, $key);
