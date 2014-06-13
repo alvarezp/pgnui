@@ -202,7 +202,7 @@ $parents = $parents_with_insert_privs;
 
 <?php if (count($parents) > 0): ?>
 <h1>Referenced tables</h1>
-<?php 	foreach($parents as $p): ?>
+<?php 	foreach($parents as $t): ?>
 	<p><a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a></p>
 <?php	endforeach; ?>
 <?php endif ?>
