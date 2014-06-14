@@ -153,7 +153,7 @@ $parents = $parents_with_insert_privs;
 	<thead>
 		<tr>
 <?php 	foreach((array) $table_columns as $c): ?>
-			<th><a href="?<?= $thistable_parameterstring . '&sort=' . $c['new_sortparam'] ?>"><?= $c['description'] == "" ? $c['column_name'] : $c['description'] ?></a>&nbsp;<?= $c['sort_state_html'] ?></th>
+			<th><a href="?<?= $thistable_parameterstring . '&sort=' . $c['new_sortparam'] ?>"><?= $c['description'] == "" ? preg_replace("/_/", " ", ucfirst($c['column_name'])) : $c['description'] ?></a>&nbsp;<?= $c['sort_state_html'] ?></th>
 <?php 	endforeach; ?>
 			<th><a href="?<?= $thistable_parameterstring ?>">x</a></th>
 		</tr>
@@ -202,8 +202,8 @@ $parents = $parents_with_insert_privs;
 
 <?php if (count($parents) > 0): ?>
 <h1>Referenced tables</h1>
-<?php 	foreach($parents as $t): ?>
-	<p><a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a></p>
+<?php 	foreach($parents as $p): ?>
+	<p><a href="/enter.php?schema=<?= $p['schema'] ?>&table=<?= $p['table'] ?>"><?= $p['pretty_name'] ?></a></p>
 <?php	endforeach; ?>
 <?php endif ?>
 </body>

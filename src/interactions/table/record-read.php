@@ -53,7 +53,7 @@ function get_columns_as_keys($dbconn, $catalog, $schema, $table) {
 				$pretty_columns[$field['column_name']]['control']->set_option_list($values);
 			}
 
-			$pretty_columns[$field['column_name']]['pretty_name'] = $field['column_name'];
+			$pretty_columns[$field['column_name']]['pretty_name'] = preg_replace("/_/", " ", ucfirst($field['column_name']));
 			$descriptions = pg_query_params($dbconn, "SELECT col_description('${schema}.${table}'::regclass, (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = $1 AND table_name = $2 AND column_name = $3));", array($schema, $table, $field['column_name']));
 
 			if ($descriptions) {
