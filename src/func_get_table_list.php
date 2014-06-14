@@ -13,7 +13,7 @@ function get_best_name_for_table($dbconn, $this_table_schema, $this_table_table)
 		if ($comment != "") {
 			return $comment;
 		} elseif ($visible == "t") {
-			return ucfirst($this_table_table);
+			return ucfirst(preg_replace("/_/", " " , $this_table_table));
 		} else {
 			return $this_table_schema . "." . $this_table_table;
 		}
