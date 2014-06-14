@@ -144,60 +144,63 @@ $parents = $parents_with_insert_privs;
 
 <?php include("menu.php"); ?>
 
+<main class="table-interaction">
+
 <h1><?= $table_pretty_name ?></h1>
 
-
 <?php if ($can_select): ?>
-<table>
-	<thead>
-		<tr>
+	<table>
+		<thead>
+			<tr>
 <?php 	foreach((array) $table_columns as $c): ?>
-			<th><a href="?<?= $thistable_parameterstring . '&sort=' . $c['new_sortparam'] ?>"><?= $c['description'] == "" ? preg_replace("/_/", " ", ucfirst($c['column_name'])) : $c['description'] ?></a>&nbsp;<?= $c['sort_state_html'] ?></th>
+				<th><a href="?<?= $thistable_parameterstring . '&sort=' . $c['new_sortparam'] ?>"><?= $c['description'] == "" ? preg_replace("/_/", " ", ucfirst($c['column_name'])) : $c['description'] ?></a>&nbsp;<?= $c['sort_state_html'] ?></th>
 <?php 	endforeach; ?>
-			<th><a href="?<?= $thistable_parameterstring ?>">x</a></th>
-		</tr>
-	</thead>
+				<th><a href="?<?= $thistable_parameterstring ?>">x</a></th>
+			</tr>
+		</thead>
 
-	<tbody>
+		<tbody>
 <?php 	foreach($table_rows as $r): ?>
-		<tr>
+			<tr>
 <?php		require_once("func_rowid.php"); ?>
 <?php		$row_id = record_columns_to_rowid($table_columns, (array) $r); ?>
 <?php 		foreach($r as $col_name => $d): ?>
 
 <?php		$pretty_columns[$col_name]['control']->set_value_from_sql($d); ?>
 
-			<td><?= $pretty_columns[$col_name]['control']->get_html_static("data[$row_id][columns][" . $col_name . "]") ?></td>
+				<td><?= $pretty_columns[$col_name]['control']->get_html_static("data[$row_id][columns][" . $col_name . "]") ?></td>
 <?php 		endforeach; ?>
 
 <?php		if ($can_update): ?>
-			<td><a href="edit-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Mod</a></td>
+				<td><a href="edit-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Mod</a></td>
 <?php		endif; ?>
 
 <?php		if ($can_select): ?>
-			<td><a href="view-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">View</a></td>
+				<td><a href="view-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">View</a></td>
 <?php		endif; ?>
 
 <?php		if ($can_delete): ?>
-			<td><a href="delete-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Del</a></td>
+				<td><a href="delete-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Del</a></td>
 <?php		endif; ?>
 
 <?php		if ($can_delete): ?>
-			<td><a href="duplicate-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Sim</a></td>
+				<td><a href="duplicate-record.php?schema=<?= $schema ?>&table=<?= $table ?>&rowid=<?= $row_id ?>">Sim</a></td>
 <?php		endif; ?>
 
-		<tr>
+			<tr>
 <?php 	endforeach; ?>
-	</tbody>
+		</tbody>
 
-</table>
+	</table>
 <?php endif; ?>
 
 <?php if ($can_insert): ?>
-<p>
-	<a href="insert-record.php?schema=<?= $schema ?>&table=<?= $table ?>">Ins</a>
-</p>
+	<p>
+		<a href="insert-record.php?schema=<?= $schema ?>&table=<?= $table ?>">Ins</a>
+	</p>
 <?php endif; ?>
+
+</main>
 
 <?php if (count($parents) > 0): ?>
 <h1>Referenced tables</h1>

@@ -10,11 +10,11 @@ a:hover {
 	text-decoration: underline;
 }
 
-table {
+.table-interaction table {
 	border-collapse: collapse;
 }
 
-tr {
+.table-interaction tbody tr {
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 }
