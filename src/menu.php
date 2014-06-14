@@ -4,11 +4,16 @@ require_once("func_database.php");
 $dbname = get_best_name_for_this_database($dbconn);
 ?>
 
-<h1><?=$dbname?></h1>
+<header>
+	<h1><span><?=$dbname?></span></h1>
 
-<p> | 
+	<nav>
+		<h2>Relations</h2>
+		<ul>
 <?php foreach((array) $tables as $t): ?>
-	<a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a> | 
+			<li><a href="/enter.php?<?= $t['parameterstring'] ?>"><?= $t['pretty_name'] ?></a></li>
 <?php endforeach ?>
-</p>
+		</ul>
+	</nav>
 
+</header>
