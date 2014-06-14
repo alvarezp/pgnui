@@ -110,8 +110,7 @@ if ($referenced_tables != FALSE) foreach ($referenced_tables as $rt) {
 $parents = $parents_with_insert_privs;
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-	"http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 
 <html>
 
