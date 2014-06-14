@@ -78,7 +78,7 @@ foreach ($table_columns as $k => $c) {
 	$table_columns[$k]['new_sortparam'] =  trim($c['column_name'] . ':' . $new_direction . ';' . $cleaned_sort[0], ";");
 	$table_columns[$k]['sort_state_dir'] = $cleaned_sort[2];
 	$table_columns[$k]['sort_state_order'] = $cleaned_sort[4] + 1;
-	$table_columns[$k]['sort_state_html'] = $cleaned_sort[2] == "desc" ? "<span class='sub'>" . $table_columns[$k]['sort_state_order'] . "</span>" : ($cleaned_sort[2] == "asc" ? "<span class='sup'>" . $table_columns[$k]['sort_state_order'] . "</span>" : "");
+	$table_columns[$k]['sort_state_html'] = $cleaned_sort[2] == "desc" ? "&nbsp;<span class='sub'>" . $table_columns[$k]['sort_state_order'] . "</span>" : ($cleaned_sort[2] == "asc" ? "&nbsp;<span class='sup'>" . $table_columns[$k]['sort_state_order'] . "</span>" : "");
 }
 
 $table_pretty_name = get_best_name_for_table($dbconn, $schema, $table);
@@ -153,7 +153,7 @@ $parents = $parents_with_insert_privs;
 		<thead>
 			<tr>
 <?php 	foreach((array) $table_columns as $c): ?>
-				<th><a href="?<?= $thistable_parameterstring . '&sort=' . $c['new_sortparam'] ?>"><?= $c['description'] == "" ? preg_replace("/_/", " ", ucfirst($c['column_name'])) : $c['description'] ?></a>&nbsp;<?= $c['sort_state_html'] ?></th>
+				<th><a href="?<?= $thistable_parameterstring . '&sort=' . $c['new_sortparam'] ?>"><?= $c['description'] == "" ? preg_replace("/_/", " ", ucfirst($c['column_name'])) : $c['description'] ?></a><?= $c['sort_state_html'] ?></th>
 <?php 	endforeach; ?>
 				<th colspan="4"><a href="?<?= $thistable_parameterstring ?>">(Clear sort)</a></th>
 			</tr>
