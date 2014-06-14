@@ -155,7 +155,7 @@ $parents = $parents_with_insert_privs;
 <?php 	foreach((array) $table_columns as $c): ?>
 				<th><a href="?<?= $thistable_parameterstring . '&sort=' . $c['new_sortparam'] ?>"><?= $c['description'] == "" ? preg_replace("/_/", " ", ucfirst($c['column_name'])) : $c['description'] ?></a>&nbsp;<?= $c['sort_state_html'] ?></th>
 <?php 	endforeach; ?>
-				<th><a href="?<?= $thistable_parameterstring ?>">x</a></th>
+				<th colspan="4"><a href="?<?= $thistable_parameterstring ?>">(Clear sort)</a></th>
 			</tr>
 		</thead>
 
